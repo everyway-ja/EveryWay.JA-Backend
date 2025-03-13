@@ -17,9 +17,9 @@ import jakarta.persistence.ManyToOne;
 @NoArgsConstructor
 
 @Table(name = "accountcategories_locationreports")
-public class Accountcategory_locationreport {
+public class AccountCategory_LocationReport {
     
-    @Id @ManyToOne @JoinColumn(name="id_accountcategory") private Accountcategory associatedAccountcategory;
-    @Id @ManyToOne @JoinColumn(name="id_locationreport") private Locationreport associatedLocationreport;
+    @Id @ManyToOne @JoinColumn(name="id_accountcategory") private AccountCategory associatedAccountCategory;
+    @Id @ManyToOne @JoinColumn(name="id_locationreport") private LocationReport associatedLocationReport;
 
 }

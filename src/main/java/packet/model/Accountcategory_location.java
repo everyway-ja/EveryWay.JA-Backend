@@ -17,9 +17,9 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Table(name = "accountcategories_locations")
-public class Accountcategory_location {
+public class AccountCategory_Location {
     
-    @Id @OneToOne @JoinColumn(name="id_accountcategory") private Accountcategory associatedAccountcategory;
+    @Id @OneToOne @JoinColumn(name="id_accountcategory") private AccountCategory associatedAccountCategory;
     @Id @OneToOne @JoinColumn(name="id_location") private Location associatedLocation;
 
 }

@@ -20,7 +20,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Table(name = "accounts_positions")
-public class Accountposition {
+public class AccountPosition {
     
     @Id @ManyToOne @JoinColumn(name="id_account") private Account associatedAccount;
     @Id @ManyToOne @JoinColumn(name="id_position") private Position associatedPosition;

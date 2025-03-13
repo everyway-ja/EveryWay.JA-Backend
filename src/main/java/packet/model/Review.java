@@ -23,7 +23,7 @@ import jakarta.persistence.GenerationType;
 @NoArgsConstructor
 
 @Table(name = "reviews")
-public class Reviews {
+public class Review {
     
     @Id @Column(name="ID") @GeneratedValue(strategy = GenerationType.IDENTITY) private int ID;
     @Column(name="title") private String title;

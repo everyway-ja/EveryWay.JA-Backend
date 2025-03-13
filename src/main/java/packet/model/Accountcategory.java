@@ -18,7 +18,7 @@ import jakarta.persistence.Column;
 @NoArgsConstructor
 
 @Table(name = "accountcategories")
-public class Accountcategory {
+public class AccountCategory {
     
     @Id @Column(name="ID") @GeneratedValue(strategy = GenerationType.IDENTITY) private int ID; 
     @Column(name="description") private String description;

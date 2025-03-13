@@ -18,7 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Table(name = "itinerarycategories")
-public class Itinerarycategory {
+public class ItineraryCategory {
     
     @Id @Column(name="ID") @GeneratedValue(strategy = GenerationType.IDENTITY) private int ID;
     @Column(name="description") private String description;

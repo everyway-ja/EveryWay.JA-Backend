@@ -18,7 +18,7 @@ import jakarta.persistence.ManyToOne;
 @NoArgsConstructor
 
 @Table(name = "itineraries_locations")
-public class Itinerary_location {
+public class Itinerary_Location {
     
     @Id @ManyToOne @JoinColumn(name="id_itinerary") private Itinerary associatedItinerary;
     @Id @ManyToOne @JoinColumn(name="id_location") private Location associatedLocation;
