@@ -30,7 +30,7 @@ public class Location {
     @Column(name="name") private String name;
     @Column(name="description") private String description;
     @OneToOne @JoinColumn(name = "id_position") private Position associatedPosition;
-    @ManyToOne @JoinColumn(name = "id_account") private Account asssociatedAccount;
+    @ManyToOne @JoinColumn(name = "id_account") private Account associatedAccount;
     @CreationTimestamp @Column(name="creation_timestamp") private LocalDateTime creation_timestamp;
     @UpdateTimestamp @Column(name="update_timestamp") private LocalDateTime update_timestamp;
     @Column(name="deletion_timestamp") private LocalDateTime deletion_timestamp;
