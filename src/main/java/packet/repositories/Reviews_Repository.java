@@ -2,16 +2,18 @@ package packet.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import packet.model.Review;
+
+import packet.model.tables.Account;
+import packet.model.tables.Itinerary;
+import packet.model.tables.Location;
+import packet.model.tables.Review;
+
 import java.util.List;
-import packet.model.Account;
-import packet.model.Location;
-import packet.model.Itinerary;
 
 @Repository
 public interface Reviews_Repository extends JpaRepository<Review, Integer> {
 
-    Review findByID(int ID);
+    Review findById(int id);
     
     List<Review> findByTitle(String title);
     List<Review> findByDescription(String description);

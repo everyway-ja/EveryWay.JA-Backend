@@ -1,6 +1,5 @@
-package packet.model;
+package packet.model.tables;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -17,11 +16,11 @@ import jakarta.persistence.ManyToOne;
 @AllArgsConstructor
 @NoArgsConstructor
 
-@Table(name = "itineraries_locations")
-public class Itinerary_Location {
+@Table(name = "locationcategories_locations")
+@jakarta.persistence.IdClass(LocationCategory_LocationId.class)
+public class LocationCategory_Location {
     
-    @Id @ManyToOne @JoinColumn(name="id_itinerary") private Itinerary associatedItinerary;
+    @Id @ManyToOne @JoinColumn(name="id_locationcategory") private LocationCategory associatedLocationCategory;
     @Id @ManyToOne @JoinColumn(name="id_location") private Location associatedLocation;
-    @Column(name="index") private int index;
 
 }

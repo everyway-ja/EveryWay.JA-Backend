@@ -1,4 +1,4 @@
-package packet.model;
+package packet.model.tables;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -17,6 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Table(name = "accountcategories_accounts")
+@jakarta.persistence.IdClass(AccountCategory_AccountId.class)
 public class AccountCategory_Account {
 
     @Id @OneToOne @JoinColumn(name="id_accountcategories") private AccountCategory associatedAccountCategory;

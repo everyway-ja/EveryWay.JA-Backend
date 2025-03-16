@@ -1,4 +1,4 @@
-package packet.model;
+package packet.model.tables;
 
 import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,7 +20,8 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Table(name = "accounts_positions")
-public class AccountPosition {
+@jakarta.persistence.IdClass(Account_PositionId.class)
+public class Account_Position {
     
     @Id @ManyToOne @JoinColumn(name="id_account") private Account associatedAccount;
     @Id @ManyToOne @JoinColumn(name="id_position") private Position associatedPosition;

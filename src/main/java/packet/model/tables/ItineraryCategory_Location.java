@@ -1,4 +1,4 @@
-package packet.model;
+package packet.model.tables;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -17,6 +17,7 @@ import jakarta.persistence.ManyToOne;
 @NoArgsConstructor
 
 @Table(name = "itinerarycategories_itineraries")
+@jakarta.persistence.IdClass(ItineraryCategory_LocationId.class)
 public class ItineraryCategory_Location {
     
     @Id @ManyToOne @JoinColumn(name="id_itinerarycategory") private ItineraryCategory associatedItineraryCategory;

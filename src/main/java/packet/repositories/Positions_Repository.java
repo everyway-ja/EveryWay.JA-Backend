@@ -2,13 +2,15 @@ package packet.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import packet.model.Position;
+
+import packet.model.tables.Position;
+
 import java.util.List;
 
 @Repository
 public interface Positions_Repository extends JpaRepository<Position, Integer> {
 
-    Position findByID(int ID);
+    Position findById(int id);
     
     List<Position> findByNation(String nation);
     List<Position> findByRegionState(String region_state);

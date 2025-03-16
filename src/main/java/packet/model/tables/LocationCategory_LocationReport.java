@@ -1,4 +1,4 @@
-package packet.model;
+package packet.model.tables;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -17,6 +17,7 @@ import jakarta.persistence.ManyToOne;
 @NoArgsConstructor
 
 @Table(name = "locationcategories_locationreports")
+@jakarta.persistence.IdClass(LocationCategory_LocationReportId.class)
 public class LocationCategory_LocationReport {
     
     @Id @ManyToOne @JoinColumn(name="id_locationcategory") private LocationCategory associatedLocationCategory;

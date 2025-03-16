@@ -1,4 +1,4 @@
-package packet.model;
+package packet.model.tables;
 
 import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
@@ -22,7 +22,7 @@ import lombok.Setter;
 @Table(name = "positions")
 public class Position {
     
-    @Id @Column(name="ID") @GeneratedValue(strategy = GenerationType.IDENTITY) private int ID;
+    @Id @Column(name="ID") @GeneratedValue(strategy = GenerationType.IDENTITY) private int id;
     @Column(name="x_coordinate") private float xCoordinate;
     @Column(name="y_coordinate") private float yCoordinate;
     @Column(name="nation") private String nation;

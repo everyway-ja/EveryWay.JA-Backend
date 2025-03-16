@@ -1,5 +1,6 @@
-package packet.model;
+package packet.model.tables;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,7 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.Column;
 
 @Entity
 @Getter
@@ -17,10 +17,11 @@ import jakarta.persistence.Column;
 @AllArgsConstructor
 @NoArgsConstructor
 
-@Table(name = "accountcategories")
-public class AccountCategory {
+@Table(name = "languages")
+public class Language {
     
-    @Id @Column(name="ID") @GeneratedValue(strategy = GenerationType.IDENTITY) private int ID; 
-    @Column(name="description") private String description;
+    @Id @Column(name="ID") @GeneratedValue(strategy = GenerationType.IDENTITY) private int id;
+    @Column(name="short_description") private String shortDescription;
+    @Column(name="long_description") private String longDescription;
 
 }

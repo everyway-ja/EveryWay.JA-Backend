@@ -2,16 +2,18 @@ package packet.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import packet.model.Location;
-import packet.model.Account;
-import packet.model.Position;
+
+import packet.model.tables.Account;
+import packet.model.tables.Location;
+import packet.model.tables.Position;
+
 import java.util.List;
 
 
 @Repository
 public interface Locations_Repository extends JpaRepository<Location, Integer> {
 
-    Location findByID(int ID);
+    Location findById(int id);
     
     List<Location> findByName(String name);
     List<Location> findByDescription(String description);

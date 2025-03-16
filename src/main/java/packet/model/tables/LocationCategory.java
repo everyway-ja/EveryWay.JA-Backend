@@ -1,4 +1,4 @@
-package packet.model;
+package packet.model.tables;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,7 +20,7 @@ import lombok.Setter;
 @Table(name = "locationcategories")
 public class LocationCategory {
     
-    @Id @Column(name="ID") @GeneratedValue(strategy = GenerationType.IDENTITY) private int ID;
+    @Id @Column(name="ID") @GeneratedValue(strategy = GenerationType.IDENTITY) private int id;
     @Column(name="description") private String description;
     
 }

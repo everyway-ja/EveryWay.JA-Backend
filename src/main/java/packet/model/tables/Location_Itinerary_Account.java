@@ -1,4 +1,4 @@
-package packet.model;
+package packet.model.tables;
 
 import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,6 +20,7 @@ import jakarta.persistence.ManyToOne;
 @NoArgsConstructor
 
 @Table(name = "locations&itineraries_accounts")
+@jakarta.persistence.IdClass(Location_Itinerary_AccountId.class)
 public class Location_Itinerary_Account {
     
     @Id @ManyToOne @JoinColumn(name="id_location") private Location associatedLocation;
