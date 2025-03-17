@@ -1,24 +1,21 @@
 package packet.model.tables;
 
 import java.time.LocalDateTime;
+
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.ManyToOne;
+import packet.model.ids.Location_Itinerary_AccountId;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@IdClass(Location_Itinerary_AccountId.class)
 @Table(name = "locations&itineraries_accounts")
 public class Location_Itinerary_Account {
     

@@ -1,21 +1,18 @@
 package packet.model.tables;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.ManyToOne;
+import packet.model.ids.AccountCategory_LocationReportId;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@IdClass(AccountCategory_LocationReportId.class)
 @Table(name = "accountcategories_locationreports")
 public class AccountCategory_LocationReport {
     
