@@ -9,6 +9,7 @@ import packet.model.tables.Account;
 import packet.model.tables.Itinerary;
 import packet.model.tables.Location;
 import java.time.LocalDateTime;
+import org.springframework.lang.NonNull;
 
 @Repository
 public interface Locations_Itineraries_Accounts_Repository extends JpaRepository<Location_Itinerary_Account, Location_Itinerary_AccountId> {
@@ -18,5 +19,7 @@ public interface Locations_Itineraries_Accounts_Repository extends JpaRepository
     List<Location_Itinerary_Account> findByAssociatedLocation(Location location);
     List<Location_Itinerary_Account> findByAssociatedItinerary(Itinerary itinerary);
     List<Location_Itinerary_Account> findByAssociatedAccount(Account account);
+
+    @NonNull List<Location_Itinerary_Account> findAll();
 
 }

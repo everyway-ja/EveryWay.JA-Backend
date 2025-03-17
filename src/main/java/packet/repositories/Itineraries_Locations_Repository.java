@@ -7,6 +7,7 @@ import packet.model.tables.Location;
 import packet.model.tables.Itinerary_Location;
 import java.util.List;
 import packet.model.ids.Itinerary_LocationId;
+import org.springframework.lang.NonNull;
 
 @Repository
 
@@ -16,5 +17,7 @@ public interface Itineraries_Locations_Repository extends JpaRepository<Itinerar
 
     List<Itinerary> findByAssociatedItinerary(Itinerary itinerary);
     List<Location> findByAssociatedLocation(Location location);
+
+    @NonNull List<Itinerary_Location> findAll();
 
 }

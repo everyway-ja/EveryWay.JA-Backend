@@ -7,6 +7,7 @@ import packet.model.ids.AccountCategory_AccountId;
 import java.util.List;
 import packet.model.tables.Account;
 import packet.model.tables.AccountCategory_Account;
+import org.springframework.lang.NonNull;
 
 @Repository
 
@@ -16,5 +17,7 @@ public interface AccountCategories_Accounts_Repository extends JpaRepository<Acc
 
     List<AccountCategory> findByAssociatedAccountCategory(AccountCategory category);
     List<Account> findByAssociatedAccount(Account account);
+
+    @NonNull List<AccountCategory_Account> findAll();
 
 }

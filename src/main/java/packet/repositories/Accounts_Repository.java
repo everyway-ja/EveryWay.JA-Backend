@@ -6,6 +6,7 @@ import packet.model.tables.Account;
 import packet.model.tables.Language;
 import java.util.Date;
 import java.util.List;
+import org.springframework.lang.NonNull;
 
 @Repository
 
@@ -22,5 +23,7 @@ public interface Accounts_Repository extends JpaRepository<Account, Integer> {
     List<Account> findByAssociatedLanguage(Language languaage);
 
     List<Account> findByNameAndSurname(String name, String surname);
+
+    @NonNull List<Account> findAll();
 
 }

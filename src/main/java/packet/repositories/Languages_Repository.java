@@ -2,6 +2,7 @@ package packet.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.lang.NonNull;
 import packet.model.tables.Language;
 import java.util.List;
 
@@ -13,5 +14,7 @@ public interface Languages_Repository extends JpaRepository<Language, Integer> {
     
     List<Language> findByShortDescription(String shortDescription);
     List<Language> findByLongDescription(String longDescription);
+
+    @NonNull List<Language> findAll();
 
 }

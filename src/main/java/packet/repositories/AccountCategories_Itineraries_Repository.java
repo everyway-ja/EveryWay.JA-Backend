@@ -7,6 +7,7 @@ import packet.model.tables.AccountCategory;
 import packet.model.tables.AccountCategory_Itinerary;
 import packet.model.tables.Itinerary;
 import java.util.List;
+import org.springframework.lang.NonNull;
 
 @Repository
 
@@ -16,5 +17,7 @@ public interface AccountCategories_Itineraries_Repository extends JpaRepository<
 
     List<AccountCategory_Itinerary> findByAssociatedAccountCategory(AccountCategory associatedAccountCategory);
     List<AccountCategory_Itinerary> findByAssociatedItinerary(Itinerary associatedItinerary);
+
+    @NonNull List<AccountCategory_Itinerary> findAll();
 
 }

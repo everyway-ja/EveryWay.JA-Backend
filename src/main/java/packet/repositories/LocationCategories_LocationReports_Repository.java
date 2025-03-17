@@ -7,6 +7,7 @@ import packet.model.tables.LocationCategory;
 import packet.model.tables.LocationCategory_LocationReport;
 import packet.model.tables.LocationReport;
 import java.util.List;
+import org.springframework.lang.NonNull;
 
 @Repository
 
@@ -16,5 +17,7 @@ public interface LocationCategories_LocationReports_Repository extends JpaReposi
 
     List<LocationCategory_LocationReport> findByAssociatedLocationCategory(LocationCategory associatedLocationCategory);
     List<LocationCategory_LocationReport> findByAssociatedLocationReport(LocationReport associatedLocationReport);
+
+    @NonNull List<LocationCategory_LocationReport> findAll();
 
 }

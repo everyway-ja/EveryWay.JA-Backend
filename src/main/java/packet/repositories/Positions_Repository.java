@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import packet.model.tables.Position;
 import java.util.List;
+import org.springframework.lang.NonNull;
 
 @Repository
 
@@ -17,5 +18,7 @@ public interface Positions_Repository extends JpaRepository<Position, Integer> {
     List<Position> findByCityTown(String city_town);
     List<Position> findByAddress(String address);
     List<Position> findByPostalcode(String postalcode);
+
+    @NonNull List<Position> findAll();
 
 }

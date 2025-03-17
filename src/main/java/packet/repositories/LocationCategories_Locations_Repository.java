@@ -7,6 +7,7 @@ import java.util.List;
 import packet.model.tables.LocationCategory_Location;
 import packet.model.tables.LocationCategory;
 import packet.model.tables.Location;
+import org.springframework.lang.NonNull;
 
 @Repository
 
@@ -16,5 +17,7 @@ public interface LocationCategories_Locations_Repository extends JpaRepository<L
 
     List<packet.model.tables.LocationCategory> findByAssociatedLocationCategory(LocationCategory category);
     List<packet.model.tables.Location> findByAssociatedLocation(Location location);
+
+    @NonNull List<LocationCategory_Location> findAll();
 
 }

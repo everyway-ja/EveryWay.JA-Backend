@@ -7,6 +7,7 @@ import packet.model.tables.AccountCategory;
 import packet.model.tables.AccountCategory_LocationReport;
 import packet.model.tables.LocationReport;
 import java.util.List;
+import org.springframework.lang.NonNull;
 
 @Repository
 
@@ -16,4 +17,7 @@ public interface AccountCategories_LocationReports_Repository extends JpaReposit
 
     List<AccountCategory_LocationReport> findByAssociatedAccountCategory(AccountCategory associatedAccountCategory);
     List<AccountCategory_LocationReport> findByAssociatedLocationReport(LocationReport associatedLocationReport);
+
+    @NonNull List<AccountCategory_LocationReport> findAll();
+
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import packet.model.tables.Itinerary;
 import packet.model.tables.ItineraryCategory;
 import packet.model.tables.ItineraryCategory_Itinerary;
+import org.springframework.lang.NonNull;
 
 @Repository
 
@@ -16,5 +17,7 @@ public interface ItineraryCategories_Itineraries_Repository extends JpaRepositor
 
     List<ItineraryCategory> findByAssociatedItineraryCategory(ItineraryCategory category);
     List<Itinerary> findByAssociatedItinerary(Itinerary itinerary);
+
+    @NonNull List<ItineraryCategory_Itinerary> findAll();
 
 }

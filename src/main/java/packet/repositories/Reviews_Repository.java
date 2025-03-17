@@ -7,6 +7,7 @@ import packet.model.tables.Itinerary;
 import packet.model.tables.Location;
 import packet.model.tables.Review;
 import java.util.List;
+import org.springframework.lang.NonNull;
 
 @Repository
 
@@ -21,5 +22,7 @@ public interface Reviews_Repository extends JpaRepository<Review, Integer> {
     List<Review> findByAssociatedLocation(Location associatedLocation);
     List<Review> findByAssociatedItinerary(Itinerary associatedItinerary);
     List<Review> findByIsFactualityReport(boolean isFactualityReport);
+
+    @NonNull List<Review> findAll();
 
 }

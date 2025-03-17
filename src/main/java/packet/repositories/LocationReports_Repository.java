@@ -6,6 +6,7 @@ import packet.model.tables.Account;
 import packet.model.tables.LocationReport;
 import packet.model.tables.Position;
 import java.util.List;
+import org.springframework.lang.NonNull;
 
 @Repository
 
@@ -17,5 +18,7 @@ public interface LocationReports_Repository extends JpaRepository<LocationReport
     List<LocationReport> findByDescription(String description);
     List<LocationReport> findByAssociatedAccount(Account associatedAccount);
     List<LocationReport> findByAssociatedPosition(Position associatedPosition);
+
+    @NonNull List<LocationReport> findAll();
 
 }
