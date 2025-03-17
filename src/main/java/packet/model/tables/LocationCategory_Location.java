@@ -9,15 +9,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.IdClass;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@IdClass(packet.model.ids.LocationCategory_LocationId.class)
 @Table(name = "locationcategories_locations")
-@jakarta.persistence.IdClass(LocationCategory_LocationId.class)
 public class LocationCategory_Location {
     
     @Id @ManyToOne @JoinColumn(name="id_locationcategory") private LocationCategory associatedLocationCategory;

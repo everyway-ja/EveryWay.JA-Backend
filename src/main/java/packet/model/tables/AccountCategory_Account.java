@@ -9,15 +9,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import jakarta.persistence.IdClass;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@IdClass(packet.model.ids.AccountCategory_AccountId.class)
 @Table(name = "accountcategories_accounts")
-@jakarta.persistence.IdClass(AccountCategory_AccountId.class)
 public class AccountCategory_Account {
 
     @Id @OneToOne @JoinColumn(name="id_accountcategories") private AccountCategory associatedAccountCategory;

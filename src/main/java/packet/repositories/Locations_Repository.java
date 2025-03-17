@@ -2,11 +2,9 @@ package packet.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import packet.model.tables.Account;
 import packet.model.tables.Location;
 import packet.model.tables.Position;
-
 import java.util.List;
 
 

@@ -9,16 +9,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.IdClass;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@IdClass(packet.model.ids.ItineraryCategory_ItineraryId.class)
 @Table(name = "itinerarycategories_itineraries")
-@jakarta.persistence.IdClass(ItineraryCategory_LocationId.class)
-public class ItineraryCategory_Location {
+public class ItineraryCategory_Itinerary {
     
     @Id @ManyToOne @JoinColumn(name="id_itinerarycategory") private ItineraryCategory associatedItineraryCategory;
     @Id @ManyToOne @JoinColumn(name="id_itinerary") private Itinerary associatedItinerary;

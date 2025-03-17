@@ -20,7 +20,6 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Table(name = "accounts_positions")
-@jakarta.persistence.IdClass(Account_PositionId.class)
 public class Account_Position {
     
     @Id @ManyToOne @JoinColumn(name="id_account") private Account associatedAccount;

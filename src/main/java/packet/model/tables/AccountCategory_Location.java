@@ -17,7 +17,6 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Table(name = "accountcategories_locations")
-@jakarta.persistence.IdClass(AccountCategory_LocationId.class)
 public class AccountCategory_Location {
     
     @Id @OneToOne @JoinColumn(name="id_accountcategory") private AccountCategory associatedAccountCategory;
