@@ -15,7 +15,7 @@ import lombok.Setter;
 
 public class AccountCategory_AccountId implements Serializable {
 
-    private int idAssociatedAccountCategory;
-    private int idAssociatedAccount;
+    private int associatedAccountCategory;
+    private int associatedAccount;
 
 }

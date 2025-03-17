@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 
 public class Account_PositionId implements Serializable {
 
-    private int idAssociatedAccount;
-    private int idAssociatedPosition;
-    private LocalDateTime creation_timestamp;
+    private int associatedAccount;
+    private int associatedPosition;
+    private LocalDateTime creationTimestamp;
 
 }

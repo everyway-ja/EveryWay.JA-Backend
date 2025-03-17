@@ -15,7 +15,7 @@ import lombok.Setter;
 
 public class LocationCategory_LocationReportId implements Serializable {
 
-    private int idAssociatedLocationCategory;
-    private int idAssociatedLocationReport;
+    private int associatedLocationCategory;
+    private int associatedLocationReport;
 
 }

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 public interface Accounts_Positions_Repository extends JpaRepository<Account_Position, Account_PositionId> {
 
-    Account_Position findByAssociatedAccountAndAssociatedPositionAndCreation_Timestamp(Account account, Position position, LocalDateTime creation_timestamp);
+    Account_Position findByAssociatedAccountAndAssociatedPositionAndCreationTimestamp(Account account, Position position, LocalDateTime creation_timestamp);
 
     Account_Position findByAssociatedAccount(Account associatedAccount);
     Account_Position findByAssociatedPosition(Position associatedPosition);

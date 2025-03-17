@@ -16,9 +16,9 @@ import java.time.LocalDateTime;
 
 public class Location_Itinerary_AccountId implements Serializable {
 
-    private int idAssociatedLocation;
-    private int idAssociatedItinerary;
-    private int idAssociatedAccount;
-    private LocalDateTime creation_timestamp;
+    private int associatedLocation;
+    private int associatedItinerary;
+    private int associatedAccount;
+    private LocalDateTime creationTimestamp;
 
 }

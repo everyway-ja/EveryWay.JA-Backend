@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Repository
 public interface Locations_Itineraries_Accounts_Repository extends JpaRepository<Location_Itinerary_Account, Location_Itinerary_AccountId> {
 
-    Location_Itinerary_Account findByAssociatedLocationAndAssociatedItineraryAndAssociatedAccountAndCreation_timestamp(Location location, Itinerary itinerary, Account account, LocalDateTime creation_timestamp);
+    Location_Itinerary_Account findByAssociatedLocationAndAssociatedItineraryAndAssociatedAccountAndCreationTimestamp(Location location, Itinerary itinerary, Account account, LocalDateTime creation_timestamp);
 
     List<Location_Itinerary_Account> findByAssociatedLocation(Location location);
     List<Location_Itinerary_Account> findByAssociatedItinerary(Itinerary itinerary);

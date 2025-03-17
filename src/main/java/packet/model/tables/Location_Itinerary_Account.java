@@ -22,6 +22,6 @@ public class Location_Itinerary_Account {
     @Id @ManyToOne @JoinColumn(name="id_location") private Location associatedLocation;
     @Id @ManyToOne @JoinColumn(name="id_itinerary") private Itinerary associatedItinerary;
     @Id @ManyToOne @JoinColumn(name="id_account") private Account associatedAccount;
-    @Id @CreationTimestamp @Column(name="creation_timestamp") private LocalDateTime creation_timestamp;
+    @Id @Column(name="creation_timestamp") private LocalDateTime creationTimestamp;
     
 }

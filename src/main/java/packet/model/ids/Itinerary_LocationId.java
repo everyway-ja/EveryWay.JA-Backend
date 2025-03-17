@@ -15,7 +15,7 @@ import lombok.Setter;
 
 public class Itinerary_LocationId implements Serializable {
 
-    private int idAssociatedItinerary;
-    private int idAssociatedLocation;
+    private int associatedItinerary;
+    private int associatedLocation;
 
 }
