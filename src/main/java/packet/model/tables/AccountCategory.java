@@ -16,7 +16,6 @@ import jakarta.persistence.Column;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Table(name = "accountcategories")
 public class AccountCategory {
     

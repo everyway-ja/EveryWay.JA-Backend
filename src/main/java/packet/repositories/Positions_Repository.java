@@ -6,6 +6,7 @@ import packet.model.tables.Position;
 import java.util.List;
 
 @Repository
+
 public interface Positions_Repository extends JpaRepository<Position, Integer> {
 
     Position findById(int id);

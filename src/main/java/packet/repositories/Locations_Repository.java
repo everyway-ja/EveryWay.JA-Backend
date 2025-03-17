@@ -7,8 +7,8 @@ import packet.model.tables.Location;
 import packet.model.tables.Position;
 import java.util.List;
 
-
 @Repository
+
 public interface Locations_Repository extends JpaRepository<Location, Integer> {
 
     Location findById(int id);

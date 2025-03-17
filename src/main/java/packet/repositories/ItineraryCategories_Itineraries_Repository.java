@@ -9,6 +9,7 @@ import packet.model.tables.ItineraryCategory;
 import packet.model.tables.ItineraryCategory_Itinerary;
 
 @Repository
+
 public interface ItineraryCategories_Itineraries_Repository extends JpaRepository<ItineraryCategory_Itinerary, ItineraryCategory_ItineraryId> {
     
     ItineraryCategory_Itinerary findByAssociatedItineraryCategoryAndAssociatedItinerary(ItineraryCategory category, Itinerary itinerary);

@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -15,7 +16,8 @@ import lombok.Setter;
 
 public class Account_PositionId implements Serializable {
 
-    private int associatedAccount;
-    private int associatedPosition;
+    private int idAssociatedAccount;
+    private int idAssociatedPosition;
+    private LocalDateTime creation_timestamp;
 
 }

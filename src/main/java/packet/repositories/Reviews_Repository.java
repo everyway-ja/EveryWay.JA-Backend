@@ -9,6 +9,7 @@ import packet.model.tables.Review;
 import java.util.List;
 
 @Repository
+
 public interface Reviews_Repository extends JpaRepository<Review, Integer> {
 
     Review findById(int id);

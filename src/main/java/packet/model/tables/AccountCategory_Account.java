@@ -10,13 +10,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.IdClass;
+import packet.model.ids.AccountCategory_AccountId;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@IdClass(packet.model.ids.AccountCategory_AccountId.class)
+@IdClass(AccountCategory_AccountId.class)
 @Table(name = "accountcategories_accounts")
 public class AccountCategory_Account {
 

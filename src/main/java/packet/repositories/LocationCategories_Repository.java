@@ -5,8 +5,8 @@ import org.springframework.stereotype.Repository;
 import packet.model.tables.LocationCategory;
 import java.util.List;
 
-
 @Repository
+
 public interface LocationCategories_Repository extends JpaRepository<LocationCategory, Integer> {
 
     LocationCategory findById(int id);

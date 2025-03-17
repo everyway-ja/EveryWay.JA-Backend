@@ -10,13 +10,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.IdClass;
+import packet.model.ids.ItineraryCategory_ItineraryId;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@IdClass(packet.model.ids.ItineraryCategory_ItineraryId.class)
+@IdClass(ItineraryCategory_ItineraryId.class)
 @Table(name = "itinerarycategories_itineraries")
 public class ItineraryCategory_Itinerary {
     

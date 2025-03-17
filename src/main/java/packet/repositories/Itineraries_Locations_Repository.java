@@ -9,6 +9,7 @@ import java.util.List;
 import packet.model.ids.Itinerary_LocationId;
 
 @Repository
+
 public interface Itineraries_Locations_Repository extends JpaRepository<Itinerary_Location , Itinerary_LocationId> {
 
     Itinerary_Location findByAssociatedItineraryAndAssociatedLocation(Itinerary itinerary, Location location);

@@ -9,6 +9,7 @@ import packet.model.tables.LocationCategory;
 import packet.model.tables.Location;
 
 @Repository
+
 public interface LocationCategories_Locations_Repository extends JpaRepository<LocationCategory_Location , LocationCategory_LocationId> {
 
     LocationCategory_Location findByAssociatedLocationCategoryAndAssociatedLocation(LocationCategory category, Location location);

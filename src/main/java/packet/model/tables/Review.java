@@ -21,7 +21,6 @@ import jakarta.persistence.GenerationType;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Table(name = "reviews")
 public class Review {
     

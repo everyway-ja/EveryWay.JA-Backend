@@ -16,7 +16,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Table(name = "languages")
 public class Language {
     

@@ -7,6 +7,7 @@ import packet.model.tables.*;
 import java.util.List;
 
 @Repository
+
 public interface AccountCategories_Itineraries_Repository extends JpaRepository<AccountCategory_Itinerary, AccountCategory_ItineraryId> {
 
     AccountCategory_Itinerary findByAssociatedAccountCategoryAndAssociatedItinerary(AccountCategory associatedAccountCategory, Itinerary associatedItinerary);

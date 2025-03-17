@@ -7,6 +7,7 @@ import packet.model.tables.*;
         import java.util.List;
 
 @Repository
+
 public interface AccountCategories_LocationReports_Repository extends JpaRepository<AccountCategory_LocationReport, AccountCategory_LocationReportId> {
 
     AccountCategory_LocationReport findByAssociatedAccountCategoryAndAssociatedLocationReport(AccountCategory associatedAccountCategory, LocationReport associatedLocationReport);

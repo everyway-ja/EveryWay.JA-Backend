@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
+
 public interface Accounts_Repository extends JpaRepository<Account, Integer> {
 
     Account findById(int id);

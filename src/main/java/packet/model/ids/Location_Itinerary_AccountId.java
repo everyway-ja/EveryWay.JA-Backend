@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -15,8 +16,9 @@ import lombok.Setter;
 
 public class Location_Itinerary_AccountId implements Serializable {
 
-    private int location;
-    private int itinerary;
-    private int account;
+    private int idAssociatedLocation;
+    private int idAssociatedItinerary;
+    private int idAssociatedAccount;
+    private LocalDateTime creation_timestamp;
 
 }

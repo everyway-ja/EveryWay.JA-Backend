@@ -5,8 +5,8 @@ import org.springframework.stereotype.Repository;
 import packet.model.tables.ItineraryCategory;
 import java.util.List;
 
-
 @Repository
+
 public interface ItineraryCategories_Repsitory extends JpaRepository<ItineraryCategory, Integer> {
 
     ItineraryCategory findById(int id);

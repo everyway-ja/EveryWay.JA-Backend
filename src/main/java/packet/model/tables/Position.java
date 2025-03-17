@@ -18,7 +18,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Table(name = "positions")
 public class Position {
     

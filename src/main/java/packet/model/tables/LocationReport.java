@@ -20,7 +20,6 @@ import jakarta.persistence.JoinColumn;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Table(name = "locationreports")
 public class LocationReport {
     

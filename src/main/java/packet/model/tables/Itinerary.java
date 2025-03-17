@@ -21,7 +21,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Table(name = "itineraries")
 public class Itinerary {
     

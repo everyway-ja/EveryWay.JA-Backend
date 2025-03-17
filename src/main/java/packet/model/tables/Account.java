@@ -22,7 +22,6 @@ import jakarta.persistence.Column;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Table(name="accounts")
 public class Account {
 

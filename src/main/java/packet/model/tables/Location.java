@@ -22,7 +22,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Table(name = "locations")
 public class Location {
     

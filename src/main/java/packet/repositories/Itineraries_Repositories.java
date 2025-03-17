@@ -7,6 +7,7 @@ import packet.model.tables.Itinerary;
 import java.util.List;
 
 @Repository
+
 public interface Itineraries_Repositories extends JpaRepository<Itinerary, Integer> {
 
     Itinerary findById(int id);

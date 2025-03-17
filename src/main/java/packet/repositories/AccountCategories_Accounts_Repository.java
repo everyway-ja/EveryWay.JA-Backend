@@ -9,6 +9,7 @@ import packet.model.tables.Account;
 import packet.model.tables.AccountCategory_Account;
 
 @Repository
+
 public interface AccountCategories_Accounts_Repository extends JpaRepository<AccountCategory_Account, AccountCategory_AccountId> {
 
     AccountCategory_Account findByAssociatedAccountCategoryAndAssociatedAccount(AccountCategory category, Account account);

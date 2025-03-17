@@ -22,6 +22,6 @@ public class Account_Position {
     @Id @ManyToOne @JoinColumn(name="id_account") private Account associatedAccount;
     @Id @ManyToOne @JoinColumn(name="id_position") private Position associatedPosition;
     @Column(name="isAccountHome") private boolean isAccountHome;
-    @CreationTimestamp @Column(name="creation_timestamp") private LocalDateTime creation_timestamp;
+    @Id @CreationTimestamp @Column(name="creation_timestamp") private LocalDateTime creation_timestamp;
 
 }

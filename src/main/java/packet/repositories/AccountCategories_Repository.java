@@ -6,6 +6,7 @@ import packet.model.tables.AccountCategory;
 import java.util.List;
 
 @Repository
+
 public interface AccountCategories_Repository extends JpaRepository<AccountCategory, Integer> {
 
     AccountCategory findById(int id);

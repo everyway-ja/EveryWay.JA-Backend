@@ -10,13 +10,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.IdClass;
+import packet.model.ids.LocationCategory_LocationId;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@IdClass(packet.model.ids.LocationCategory_LocationId.class)
+@IdClass(LocationCategory_LocationId.class)
 @Table(name = "locationcategories_locations")
 public class LocationCategory_Location {
     
