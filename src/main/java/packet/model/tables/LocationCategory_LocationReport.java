@@ -14,6 +14,7 @@ import packet.model.ids.LocationCategory_LocationReportId;
 @NoArgsConstructor
 @IdClass(LocationCategory_LocationReportId.class)
 @Table(name = "locationcategories_locationreports")
+
 public class LocationCategory_LocationReport {
     
     @Id @ManyToOne @JoinColumn(name="id_locationcategory") private LocationCategory associatedLocationCategory;

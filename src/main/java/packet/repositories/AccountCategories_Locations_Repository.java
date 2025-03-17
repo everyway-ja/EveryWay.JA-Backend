@@ -3,7 +3,9 @@ package packet.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import packet.model.ids.AccountCategory_LocationId;
-import packet.model.tables.*;
+import packet.model.tables.AccountCategory;
+import packet.model.tables.AccountCategory_Location;
+import packet.model.tables.Location;
 import java.util.List;
 
 @Repository

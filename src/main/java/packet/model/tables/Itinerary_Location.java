@@ -18,9 +18,9 @@ import packet.model.ids.Itinerary_LocationId;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@IdClass(
-Itinerary_LocationId.class)
+@IdClass(Itinerary_LocationId.class)
 @Table(name = "itineraries_locations")
+
 public class Itinerary_Location {
     
     @Id @ManyToOne @JoinColumn(name="id_itinerary") private Itinerary associatedItinerary;

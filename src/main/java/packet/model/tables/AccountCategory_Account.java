@@ -19,6 +19,7 @@ import packet.model.ids.AccountCategory_AccountId;
 @NoArgsConstructor
 @IdClass(AccountCategory_AccountId.class)
 @Table(name = "accountcategories_accounts")
+
 public class AccountCategory_Account {
 
     @Id @OneToOne @JoinColumn(name="id_accountcategories") private AccountCategory associatedAccountCategory;

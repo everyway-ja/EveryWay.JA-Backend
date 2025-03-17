@@ -21,6 +21,7 @@ import jakarta.persistence.JoinColumn;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "locationreports")
+
 public class LocationReport {
     
     @Id @Column(name="ID") @GeneratedValue(strategy = GenerationType.IDENTITY) private int id;
