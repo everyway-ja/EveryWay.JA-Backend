@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 
-public interface Image_Repository extends JpaRepository<Image, Integer> {
+public interface Images_Repository extends JpaRepository<Image, Integer> {
 
     Image findById(int id);
 
