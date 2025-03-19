@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
 
 @Entity
 @Getter
@@ -22,5 +24,6 @@ public class ItineraryCategory {
     
     @Id @Column(name="ID") @GeneratedValue(strategy = GenerationType.IDENTITY) private int id;
     @Column(name="description") private String description;
+    @OneToOne @JoinColumn(name="id_image") private Image associatedImage;
 
 }

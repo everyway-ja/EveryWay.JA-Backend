@@ -33,7 +33,8 @@ public class Account {
     @Column(name="email") private String email;
     @Column(name="password") private String password;
     @Column(name="birthdate") private LocalDate birthDate;
-    @OneToOne @JoinColumn(name="language") private Language associatedLanguage;
+    @OneToOne @JoinColumn(name="id_language") private Language associatedLanguage;
+    @OneToOne @JoinColumn(name="id_image") private Image associatedImage;
     @CreationTimestamp @Column(name="creation_timestamp") private LocalDateTime creation_timestamp;
     @UpdateTimestamp @Column(name="update_timestamp") private LocalDateTime update_timestamp;
     @Column(name="deletion_timestamp") private LocalDateTime deletion_timestamp;

@@ -25,7 +25,10 @@ DROP TABLE IF EXISTS `accountcategories`;
 CREATE TABLE IF NOT EXISTS `accountcategories` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) NOT NULL,
-  PRIMARY KEY (`ID`)
+  `id_image` int(11) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_accountcategories_images` (`id_image`),
+  CONSTRAINT `FK_accountcategories_images` FOREIGN KEY (`id_image`) REFERENCES `images` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Table storing the categories (disabilities) contemplated by the application.';
 
 -- Dump dei dati della tabella everyway.accountcategories: ~0 rows (circa)
@@ -104,13 +107,16 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `birthdate` date NOT NULL,
-  `language` int(11) NOT NULL DEFAULT 1,
+  `id_language` int(11) NOT NULL DEFAULT 1,
+  `id_image` int(11) NOT NULL,
   `creation_timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
   `update_timestamp` timestamp NULL DEFAULT NULL,
   `deletion_timestamp` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY `language` (`language`),
-  CONSTRAINT `FK_accounts_languages` FOREIGN KEY (`language`) REFERENCES `languages` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `language` (`id_language`) USING BTREE,
+  KEY `FK_accounts_images` (`id_image`),
+  CONSTRAINT `FK_accounts_images` FOREIGN KEY (`id_image`) REFERENCES `images` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_accounts_languages` FOREIGN KEY (`id_language`) REFERENCES `languages` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2147483648 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Table storing the information related to accounts.';
 
 -- Dump dei dati della tabella everyway.accounts: ~0 rows (circa)
@@ -144,6 +150,39 @@ CREATE TABLE IF NOT EXISTS `images` (
 
 -- Dump dei dati della tabella everyway.images: ~0 rows (circa)
 DELETE FROM `images`;
+
+-- Dump della struttura di tabella everyway.images_itineraries
+DROP TABLE IF EXISTS `images_itineraries`;
+CREATE TABLE IF NOT EXISTS `images_itineraries` (
+  `id_image` int(11) NOT NULL,
+  `id_itinerary` int(11) NOT NULL,
+  PRIMARY KEY (`id_image`,`id_itinerary`),
+  KEY `id_image` (`id_image`),
+  KEY `id_itinerary` (`id_itinerary`),
+  CONSTRAINT `FK_images_itineraries_images` FOREIGN KEY (`id_image`) REFERENCES `images` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FKhh03dkuw0gf3baqibok2cv87i` FOREIGN KEY (`id_itinerary`) REFERENCES `itineraries` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dump dei dati della tabella everyway.images_itineraries: ~0 rows (circa)
+DELETE FROM `images_itineraries`;
+
+-- Dump della struttura di tabella everyway.images_locations
+DROP TABLE IF EXISTS `images_locations`;
+CREATE TABLE IF NOT EXISTS `images_locations` (
+  `id_image` int(11) NOT NULL,
+  `id_location` int(11) NOT NULL,
+  `id_itinerary` int(11) NOT NULL,
+  PRIMARY KEY (`id_image`,`id_location`),
+  KEY `id_location` (`id_location`),
+  KEY `id_image` (`id_image`),
+  KEY `FK82ggr0qhfjxbxuiwmnohivknq` (`id_itinerary`),
+  CONSTRAINT `FK82ggr0qhfjxbxuiwmnohivknq` FOREIGN KEY (`id_itinerary`) REFERENCES `locations` (`ID`),
+  CONSTRAINT `FK_images_locations_images` FOREIGN KEY (`id_image`) REFERENCES `images` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_images_locations_locations` FOREIGN KEY (`id_location`) REFERENCES `locations` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dump dei dati della tabella everyway.images_locations: ~0 rows (circa)
+DELETE FROM `images_locations`;
 
 -- Dump della struttura di tabella everyway.itineraries
 DROP TABLE IF EXISTS `itineraries`;
@@ -184,31 +223,34 @@ DROP TABLE IF EXISTS `itinerarycategories`;
 CREATE TABLE IF NOT EXISTS `itinerarycategories` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) NOT NULL,
-  PRIMARY KEY (`ID`)
+  `id_image` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `id_image` (`id_image`),
+  CONSTRAINT `FK_itinerarycategories_images` FOREIGN KEY (`id_image`) REFERENCES `images` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Table storing the available categories of itineraries.';
 
--- Dump dei dati della tabella everyway.itinerarycategories: ~19 rows (circa)
+-- Dump dei dati della tabella everyway.itinerarycategories: ~5 rows (circa)
 DELETE FROM `itinerarycategories`;
-INSERT INTO `itinerarycategories` (`ID`, `description`) VALUES
-	(1, 'Standard'),
-	(2, 'Adventure'),
-	(3, 'Cultural'),
-	(4, 'Luxury'),
-	(5, 'Family'),
-	(6, 'Road Trip'),
-	(7, 'Eco-friendly'),
-	(8, 'Food & Culinary'),
-	(9, 'Wellness'),
-	(10, 'Business'),
-	(11, 'Backpacking'),
-	(12, 'Solo Travel'),
-	(13, 'Themed'),
-	(14, 'Budget'),
-	(15, 'Romantic'),
-	(16, 'Staycation'),
-	(17, 'Relaxing'),
-	(18, 'Naturalistic'),
-	(19, 'Urban');
+INSERT INTO `itinerarycategories` (`ID`, `description`, `id_image`) VALUES
+	(1, 'Standard', NULL),
+	(2, 'Adventure', NULL),
+	(3, 'Cultural', NULL),
+	(4, 'Luxury', NULL),
+	(5, 'Family', NULL),
+	(6, 'Road Trip', NULL),
+	(7, 'Eco-friendly', NULL),
+	(8, 'Food & Culinary', NULL),
+	(9, 'Wellness', NULL),
+	(10, 'Business', NULL),
+	(11, 'Backpacking', NULL),
+	(12, 'Solo Travel', NULL),
+	(13, 'Themed', NULL),
+	(14, 'Budget', NULL),
+	(15, 'Romantic', NULL),
+	(16, 'Staycation', NULL),
+	(17, 'Relaxing', NULL),
+	(18, 'Naturalistic', NULL),
+	(19, 'Urban', NULL);
 
 -- Dump della struttura di tabella everyway.itinerarycategories_itineraries
 DROP TABLE IF EXISTS `itinerarycategories_itineraries`;
@@ -245,33 +287,36 @@ DROP TABLE IF EXISTS `locationcategories`;
 CREATE TABLE IF NOT EXISTS `locationcategories` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) NOT NULL,
-  PRIMARY KEY (`ID`)
+  `id_image` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `id_image` (`id_image`),
+  CONSTRAINT `FK_locationcategories_images` FOREIGN KEY (`id_image`) REFERENCES `images` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Table storing the categories of locations.';
 
 -- Dump dei dati della tabella everyway.locationcategories: ~21 rows (circa)
 DELETE FROM `locationcategories`;
-INSERT INTO `locationcategories` (`ID`, `description`) VALUES
-	(1, 'Restaurant'),
-	(2, 'Hotel'),
-	(3, 'Bar'),
-	(4, 'Public Park'),
-	(5, 'Amusement Park'),
-	(6, 'Museum'),
-	(7, 'Bed and Breakfast'),
-	(8, 'Hospital'),
-	(9, 'Pharmacy'),
-	(10, 'Police Station'),
-	(11, 'Bus Stop'),
-	(12, 'Train Station'),
-	(13, 'Airport'),
-	(14, 'Beach'),
-	(15, 'Supermarket'),
-	(16, 'Hypermarket'),
-	(17, 'Shopping Center'),
-	(18, 'Open Market'),
-	(19, 'Indoor Market'),
-	(20, 'Shop'),
-	(21, 'Nightclub');
+INSERT INTO `locationcategories` (`ID`, `description`, `id_image`) VALUES
+	(1, 'Restaurant', NULL),
+	(2, 'Hotel', NULL),
+	(3, 'Bar', NULL),
+	(4, 'Public Park', NULL),
+	(5, 'Amusement Park', NULL),
+	(6, 'Museum', NULL),
+	(7, 'Bed and Breakfast', NULL),
+	(8, 'Hospital', NULL),
+	(9, 'Pharmacy', NULL),
+	(10, 'Police Station', NULL),
+	(11, 'Bus Stop', NULL),
+	(12, 'Train Station', NULL),
+	(13, 'Airport', NULL),
+	(14, 'Beach', NULL),
+	(15, 'Supermarket', NULL),
+	(16, 'Hypermarket', NULL),
+	(17, 'Shopping Center', NULL),
+	(18, 'Open Market', NULL),
+	(19, 'Indoor Market', NULL),
+	(20, 'Shop', NULL),
+	(21, 'Nightclub', NULL);
 
 -- Dump della struttura di tabella everyway.locationcategories_locationreports
 DROP TABLE IF EXISTS `locationcategories_locationreports`;
