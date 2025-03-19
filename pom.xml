@@ -13,18 +13,28 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>app</name>
 	<description>Demo project for Spring Boot</description>
-	<url/>
+	<url>https://github.com/your-repo-url</url>
 	<licenses>
-		<license/>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution>repo</distribution>
+		</license>
 	</licenses>
 	<developers>
-		<developer/>
+		<developer>
+			<id>your-id</id>
+			<name>Your Name</name>
+			<email>your-email@example.com</email>
+			<organization>Your Organization</organization>
+			<organizationUrl>https://your-organization-url</organizationUrl>
+		</developer>
 	</developers>
 	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
+		<connection>scm:git:git://github.com/your-repo-url.git</connection>
+		<developerConnection>scm:git:ssh://github.com/your-repo-url.git</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/your-repo-url</url>
 	</scm>
 	<properties>
 		<java.version>23</java.version>
