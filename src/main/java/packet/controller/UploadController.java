@@ -26,7 +26,7 @@ public class UploadController {
         }
 
         try {
-            Path path = Paths.get(uploadPath, file.getOriginalFilename()); // Corretto: senza +
+            Path path = Paths.get(uploadPath, file.getOriginalFilename());
             Files.createDirectories(path.getParent()); // Crea le directory se non esistono
             Files.write(path, file.getBytes());
 
