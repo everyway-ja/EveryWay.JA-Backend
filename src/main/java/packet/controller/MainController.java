@@ -12,5 +12,5 @@ public class MainController {
     public ResponseEntity<String> index() {
         return ResponseEntity.ok().body("{'message': 'Backend funzionante'}");
     }
-    
+
 }
