@@ -24,7 +24,7 @@ USE `everyway`;
 DROP TABLE IF EXISTS `accountcategories`;
 CREATE TABLE IF NOT EXISTS `accountcategories` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(255) DEFAULT NULL,
+  `description` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Table storing the categories (disabilities) contemplated by the application.';
 
@@ -121,7 +121,7 @@ DROP TABLE IF EXISTS `accounts_positions`;
 CREATE TABLE IF NOT EXISTS `accounts_positions` (
   `id_account` int(11) NOT NULL,
   `id_position` int(11) NOT NULL,
-  `isAccountHome` bit(1) NOT NULL,
+  `isAccountHome` bit(1) DEFAULT NULL,
   `creation_timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_account`,`id_position`,`creation_timestamp`),
   KEY `id_account` (`id_account`),
@@ -132,6 +132,18 @@ CREATE TABLE IF NOT EXISTS `accounts_positions` (
 
 -- Dump dei dati della tabella everyway.accounts_positions: ~0 rows (circa)
 DELETE FROM `accounts_positions`;
+
+-- Dump della struttura di tabella everyway.images
+DROP TABLE IF EXISTS `images`;
+CREATE TABLE IF NOT EXISTS `images` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `image` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Table storing the images that everyway uses.';
+
+-- Dump dei dati della tabella everyway.images: ~0 rows (circa)
+DELETE FROM `images`;
 
 -- Dump della struttura di tabella everyway.itineraries
 DROP TABLE IF EXISTS `itineraries`;
@@ -171,7 +183,7 @@ DELETE FROM `itineraries_locations`;
 DROP TABLE IF EXISTS `itinerarycategories`;
 CREATE TABLE IF NOT EXISTS `itinerarycategories` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(255) DEFAULT NULL,
+  `description` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Table storing the available categories of itineraries.';
 
@@ -217,8 +229,8 @@ DELETE FROM `itinerarycategories_itineraries`;
 DROP TABLE IF EXISTS `languages`;
 CREATE TABLE IF NOT EXISTS `languages` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `short_description` varchar(255) DEFAULT NULL,
-  `long_description` varchar(255) DEFAULT NULL,
+  `short_description` varchar(255) NOT NULL,
+  `long_description` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Table storing the available languages.';
 
@@ -232,7 +244,7 @@ INSERT INTO `languages` (`ID`, `short_description`, `long_description`) VALUES
 DROP TABLE IF EXISTS `locationcategories`;
 CREATE TABLE IF NOT EXISTS `locationcategories` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(255) DEFAULT NULL,
+  `description` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Table storing the categories of locations.';
 
@@ -295,7 +307,7 @@ DELETE FROM `locationcategories_locations`;
 DROP TABLE IF EXISTS `locationreports`;
 CREATE TABLE IF NOT EXISTS `locationreports` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `id_position` int(11) NOT NULL,
   `id_account` int(11) NOT NULL,
@@ -314,7 +326,7 @@ DELETE FROM `locationreports`;
 DROP TABLE IF EXISTS `locations`;
 CREATE TABLE IF NOT EXISTS `locations` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `id_position` int(11) NOT NULL,
   `id_account` int(11) DEFAULT NULL,
@@ -356,9 +368,9 @@ CREATE TABLE IF NOT EXISTS `positions` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `x_coordinate` double NOT NULL,
   `y_coordinate` double NOT NULL,
-  `nation` varchar(255) DEFAULT NULL,
-  `region_state` varchar(255) DEFAULT NULL,
-  `province` varchar(255) DEFAULT NULL,
+  `nation` varchar(255) NOT NULL,
+  `region_state` varchar(255) NOT NULL,
+  `province` varchar(255) NOT NULL,
   `city_town` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `postalcode` varchar(255) DEFAULT NULL,
@@ -373,16 +385,16 @@ DELETE FROM `positions`;
 DROP TABLE IF EXISTS `reviews`;
 CREATE TABLE IF NOT EXISTS `reviews` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `rating` int(11) NOT NULL,
   `id_account` int(11) NOT NULL,
   `id_location` int(11) DEFAULT NULL,
   `id_itinerary` int(11) DEFAULT NULL,
+  `isFactualityReport` bit(1) DEFAULT NULL,
   `creation_timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
   `update_timestamp` timestamp NULL DEFAULT NULL,
   `deletion_timestamp` timestamp NULL DEFAULT NULL,
-  `isFactualityReport` bit(1) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `id_account` (`id_account`),
   KEY `id_location` (`id_location`),
