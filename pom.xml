@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.3</version>
+		<version>3.4.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>everway</groupId>
@@ -23,19 +23,10 @@
 	</licenses>
 	<developers>
 		<developer>
-			<id>your-id</id>
-			<name>Your Name</name>
-			<email>your-email@example.com</email>
-			<organization>Your Organization</organization>
-			<organizationUrl>https://your-organization-url</organizationUrl>
+			<organization>EveryWay.JA</organization>
+			<organizationUrl>https://www.every-way.it</organizationUrl>
 		</developer>
 	</developers>
-	<scm>
-		<connection>scm:git:git://github.com/your-repo-url.git</connection>
-		<developerConnection>scm:git:ssh://github.com/your-repo-url.git</developerConnection>
-		<tag>HEAD</tag>
-		<url>https://github.com/your-repo-url</url>
-	</scm>
 	<properties>
 		<java.version>23</java.version>
 	</properties>

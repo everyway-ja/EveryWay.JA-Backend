@@ -21,7 +21,7 @@ import jakarta.persistence.GenerationType;
 public class Image {
     
     @Id @Column(name="ID") @GeneratedValue(strategy = GenerationType.IDENTITY) private int id;
-    @Column(name="image") private String image; // tocheck
+    @Column(name="image") private String image;
     @Column(name="description") private String description;
 
 }
