@@ -13,7 +13,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>app</name>
 	<description>Demo project for Spring Boot</description>
-	<url>https://github.com/your-repo-url</url>
 	<licenses>
 		<license>
 			<name>Apache License, Version 2.0</name>
