@@ -13,7 +13,9 @@ public class MainController {
     // TOCHECK DA RIMUOVERE A TEMPO DEBITO
     @GetMapping("/")
     public ResponseEntity<String> index() {
-        return ResponseEntity.ok().body("{'message': 'Backend funzionante'}");
+        ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.ok();
+        ResponseEntity<String> response = responseBuilder.body("{'message': 'Backend funzionante'}");
+        return response;
     }
 
     @GetMapping("/error")

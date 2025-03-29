@@ -23,7 +23,7 @@ public class ImageController {
     private String uploadPath;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> handle_fileUpload(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> handle_fileUpload ( @RequestParam("file") MultipartFile file ) {
         
         if (file.isEmpty()) {
             return new ResponseEntity<>("Missing File.", HttpStatus.BAD_REQUEST);
@@ -75,15 +75,15 @@ public class ImageController {
     }
 
     @GetMapping("/download")
-    public ResponseEntity<byte[]> download_file(@RequestParam("filename") String filename) {
+    public ResponseEntity<byte[]> download_file ( @RequestParam("filename") String filename ) {
     
         try {
     
             byte[] file = read_file(filename);
     
-            return ResponseEntity.ok()
-                    .header("Content-Disposition", "attachment; filename=" + filename)
-                    .body(file);
+            ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.ok();
+            responseBuilder.header("Content-Disposition", "attachment; filename=" + filename);
+            return responseBuilder.body(file);
     
         } 
         
@@ -101,9 +101,9 @@ public class ImageController {
         
             byte[] combinedFiles = combine_files(filenames);
         
-            return ResponseEntity.ok()
-                    .header("Content-Disposition", "attachment; filename=files.zip")
-                    .body(combinedFiles);
+            ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.ok();
+            responseBuilder.header("Content-Disposition", "attachment; filename=files.zip");
+            return responseBuilder.body(combinedFiles);
         
         } 
         
@@ -119,10 +119,15 @@ public class ImageController {
     private void save_file ( MultipartFile file ) throws IOException {
         
         Path path = get_filePath(file.getOriginalFilename());
-        
-        Files.createDirectories(path.getParent());
+        createDirectoriesIfNotExist(path.getParent());
         Files.write(path, file.getBytes());
     
+    }
+
+    private void createDirectoriesIfNotExist(Path directory) throws IOException {
+        if (!Files.exists(directory)) {
+            Files.createDirectories(directory);
+        }
     }
 
     private byte[] read_file ( String filename ) throws IOException {
