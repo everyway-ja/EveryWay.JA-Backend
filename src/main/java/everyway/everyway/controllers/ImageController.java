@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.apache.commons.io.FilenameUtils;
 
 // TODO : THE UPLOAD AND DOWNLOAD METHODS ARE NOT SECURE, ADD SECURITY CHECKS, VALIDATION, EXCEPTION HANDLING AND DISTINCTIONS FOR DIFFERENT TYPES OF IMAGES UPLOADS AND DOWNLAODS (profile pictures, itinerary pictures, etc.)
 
@@ -155,7 +156,8 @@ public class ImageController {
     }
 
     private Path get_filePath ( String filename ) {
-        return Paths.get(uploadPath, filename);
+        String sanitizedFilename = FilenameUtils.getName(filename);
+        return Paths.get(uploadPath, sanitizedFilename);
     }
 
 }
