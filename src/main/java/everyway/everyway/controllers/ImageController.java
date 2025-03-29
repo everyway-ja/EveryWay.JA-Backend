@@ -134,16 +134,20 @@ public class ImageController {
 
     private byte[] combine_files ( String[] filenames ) throws IOException {
 
-        byte[] combined = read_file(filenames[0]);
+        int totalLength = 0;
+        byte[][] fileContents = new byte[filenames.length][];
 
-        for (int i = 1; i < filenames.length; i++) {
+        for (int i = 0; i < filenames.length; i++) {
+            fileContents[i] = read_file(filenames[i]);
+            totalLength += fileContents[i].length;
+        }
 
-            byte[] temp = read_file(filenames[i]);
-            byte[] result = new byte[combined.length + temp.length];
-            System.arraycopy(combined, 0, result, 0, combined.length);
-            System.arraycopy(temp, 0, result, combined.length, temp.length);
-            combined = result;
+        byte[] combined = new byte[totalLength];
+        int currentPosition = 0;
 
+        for (byte[] fileContent : fileContents) {
+            System.arraycopy(fileContent, 0, combined, currentPosition, fileContent.length);
+            currentPosition += fileContent.length;
         }
 
         return combined;
