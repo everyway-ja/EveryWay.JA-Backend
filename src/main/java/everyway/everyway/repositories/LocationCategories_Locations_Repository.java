@@ -15,8 +15,8 @@ public interface LocationCategories_Locations_Repository extends JpaRepository<L
 
     LocationCategory_Location findByAssociatedLocationCategoryAndAssociatedLocation(LocationCategory category, Location location);
 
-    List<everyway.everyway.models.tables.LocationCategory> findByAssociatedLocationCategory(LocationCategory category);
-    List<everyway.everyway.models.tables.Location> findByAssociatedLocation(Location location);
+    List<LocationCategory> findByAssociatedLocationCategory(LocationCategory category);
+    List<Location> findByAssociatedLocation(Location location);
 
     @NonNull List<LocationCategory_Location> findAll();
 

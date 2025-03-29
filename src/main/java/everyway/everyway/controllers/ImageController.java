@@ -16,39 +16,36 @@ import java.nio.file.Paths;
 // TODO : THE UPLOAD AND DOWNLOAD METHODS ARE NOT SECURE, ADD SECURITY CHECKS, VALIDATION, EXCEPTION HANDLING AND DISTINCTIONS FOR DIFFERENT TYPES OF IMAGES UPLOADS AND DOWNLAODS (profile pictures, itinerary pictures, etc.)
 
 @Controller
-
 public class ImageController {
 
-    @Value("${file.upload.path}") private String uploadPath;
+    @Value("${file.upload.path}") 
+    private String uploadPath;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> handleFileUpload( @RequestParam("file") MultipartFile file ) {
+    public ResponseEntity<String> handle_fileUpload(@RequestParam("file") MultipartFile file) {
         
         if (file.isEmpty()) {
             return new ResponseEntity<>("Missing File.", HttpStatus.BAD_REQUEST);
         }
 
         try {
-
-            Path path = Paths.get(uploadPath, file.getOriginalFilename());
-            Files.createDirectories(path.getParent()); // Crea le directory se non esistono
-            Files.write(path, file.getBytes());
-
+        
+            save_file(file);
             // TODO : generate image description
 
             return new ResponseEntity<>("Success.", HttpStatus.OK);
-
+        
         } 
         
         catch (IOException e) {
             e.printStackTrace();
             return new ResponseEntity<>("Error.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    
+
     }
 
     @PostMapping("/uploadMultiple")
-    public ResponseEntity<String> handleMultipleFileUpload( @RequestParam("files") MultipartFile[] files ) {
+    public ResponseEntity<String> handle_multipleFileUpload ( @RequestParam("files") MultipartFile[] files ) {
         
         for (MultipartFile file : files) {
             if (file.isEmpty()) {
@@ -57,18 +54,16 @@ public class ImageController {
         }
 
         try {
-
+    
             for (MultipartFile file : files) {
-                Path path = Paths.get(uploadPath, file.getOriginalFilename());
-                Files.createDirectories(path.getParent()); // Crea le directory se non esistono
-                Files.write(path, file.getBytes());
-
+    
+                save_file(file);
                 // TODO : generate images' description
-
+    
             }
-
+    
             return new ResponseEntity<>("Success.", HttpStatus.OK);
-
+    
         } 
         
         catch (IOException e) {
@@ -79,15 +74,16 @@ public class ImageController {
     }
 
     @GetMapping("/download")
-    public ResponseEntity<byte[]> downloadFile( @RequestParam("filename") String filename ) {
-        
+    public ResponseEntity<byte[]> download_file(@RequestParam("filename") String filename) {
+    
         try {
-
-            Path path = Paths.get(uploadPath, filename);
-            byte[] file = Files.readAllBytes(path);
-
-            return ResponseEntity.ok().header("Content-Disposition", "attachment; filename=" + filename).body(file);
-
+    
+            byte[] file = read_file(filename);
+    
+            return ResponseEntity.ok()
+                    .header("Content-Disposition", "attachment; filename=" + filename)
+                    .body(file);
+    
         } 
         
         catch (IOException e) {
@@ -98,24 +94,16 @@ public class ImageController {
     }
 
     @GetMapping("/downloadMultiple")
-    public ResponseEntity<byte[]> downloadMultipleFiles( @RequestParam("filenames") String[] filenames ) {
+    public ResponseEntity<byte[]> download_multipleFiles ( @RequestParam("filenames") String[] filenames ) {
         
         try {
-
-            Path path = Paths.get(uploadPath, filenames[0]);
-            byte[] file = Files.readAllBytes(path);
-
-            for (int i = 1; i < filenames.length; i++) {
-                path = Paths.get(uploadPath, filenames[i]);
-                byte[] temp = Files.readAllBytes(path);
-                byte[] result = new byte[file.length + temp.length];
-                System.arraycopy(file, 0, result, 0, file.length);
-                System.arraycopy(temp, 0, result, file.length, temp.length);
-                file = result;
-            }
-
-            return ResponseEntity.ok().header("Content-Disposition", "attachment; filename=files.zip").body(file);
-
+        
+            byte[] combinedFiles = combine_files(filenames);
+        
+            return ResponseEntity.ok()
+                    .header("Content-Disposition", "attachment; filename=files.zip")
+                    .body(combinedFiles);
+        
         } 
         
         catch (IOException e) {
@@ -123,6 +111,47 @@ public class ImageController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     
+    }
+
+
+    
+    private void save_file ( MultipartFile file ) throws IOException {
+        
+        Path path = get_filePath(file.getOriginalFilename());
+        
+        Files.createDirectories(path.getParent());
+        Files.write(path, file.getBytes());
+    
+    }
+
+    private byte[] read_file ( String filename ) throws IOException {
+        
+        Path path = get_filePath(filename);
+
+        return Files.readAllBytes(path);
+    
+    }
+
+    private byte[] combine_files ( String[] filenames ) throws IOException {
+
+        byte[] combined = read_file(filenames[0]);
+
+        for (int i = 1; i < filenames.length; i++) {
+
+            byte[] temp = read_file(filenames[i]);
+            byte[] result = new byte[combined.length + temp.length];
+            System.arraycopy(combined, 0, result, 0, combined.length);
+            System.arraycopy(temp, 0, result, combined.length, temp.length);
+            combined = result;
+
+        }
+
+        return combined;
+
+    }
+
+    private Path get_filePath ( String filename ) {
+        return Paths.get(uploadPath, filename);
     }
 
 }
