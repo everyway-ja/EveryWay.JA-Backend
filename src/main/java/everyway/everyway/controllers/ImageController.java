@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
+import java.security.MessageDigest;
 import org.apache.commons.io.FilenameUtils;
 
 // TODO : THE UPLOAD AND DOWNLOAD METHODS ARE NOT SECURE, ADD SECURITY CHECKS, VALIDATION, EXCEPTION HANDLING AND DISTINCTIONS FOR DIFFERENT TYPES OF IMAGES UPLOADS AND DOWNLAODS (profile pictures, itinerary pictures, etc.)
@@ -115,19 +118,30 @@ public class ImageController {
     }
 
 
+
+
+
     
     private void save_file ( MultipartFile file ) throws IOException {
-        
-        Path path = get_filePath(file.getOriginalFilename());
-        createDirectoriesIfNotExist(path.getParent());
-        Files.write(path, file.getBytes());
+
+        byte[] fileBytes = file.getBytes();
+        String fileHash = generate_fileHash(fileBytes);
     
+        Path path = get_filePath(fileHash);
+        create_directoriesIfNotExist(path.getParent());
+    
+        if (!Files.exists(path)) {
+            Files.write(path, fileBytes);
+        }
+
     }
 
-    private void createDirectoriesIfNotExist(Path directory) throws IOException {
+    private void create_directoriesIfNotExist ( Path directory ) throws IOException {
+        
         if (!Files.exists(directory)) {
             Files.createDirectories(directory);
         }
+    
     }
 
     private byte[] read_file ( String filename ) throws IOException {
@@ -163,6 +177,22 @@ public class ImageController {
     private Path get_filePath ( String filename ) {
         String sanitizedFilename = FilenameUtils.getName(filename);
         return Paths.get(uploadPath, sanitizedFilename);
+    }
+
+    private String generate_fileHash ( byte[] fileBytes ) {
+    
+        try {
+
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(fileBytes);
+            return new BigInteger(1, hashBytes).toString(16); // Convert to hex
+    
+        } 
+        
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error generating file hash", e);
+        }
+    
     }
 
 }
