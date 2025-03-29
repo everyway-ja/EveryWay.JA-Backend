@@ -13,7 +13,6 @@ import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.NoSuchAlgorithmException;
 import java.security.MessageDigest;
 import org.apache.commons.io.FilenameUtils;
 
@@ -117,18 +116,13 @@ public class ImageController {
     
     }
 
-
-
-
-
-    
     private void save_file ( MultipartFile file ) throws IOException {
 
         byte[] fileBytes = file.getBytes();
         String fileHash = generate_fileHash(fileBytes);
     
         Path path = get_filePath(fileHash);
-        create_directoriesIfNotExist(path.getParent());
+        create_directoriesIfNotExist(path);
     
         if (!Files.exists(path)) {
             Files.write(path, fileBytes);
@@ -136,12 +130,11 @@ public class ImageController {
 
     }
 
-    private void create_directoriesIfNotExist ( Path directory ) throws IOException {
-        
-        if (!Files.exists(directory)) {
+    private void create_directoriesIfNotExist ( Path path ) throws IOException {
+        Path directory = path.getParent();
+        if (directory != null && !Files.exists(directory)) {
             Files.createDirectories(directory);
         }
-    
     }
 
     private byte[] read_file ( String filename ) throws IOException {
@@ -189,8 +182,8 @@ public class ImageController {
     
         } 
         
-        catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Error generating file hash", e);
+        catch (Exception e) {
+            throw new RuntimeException();
         }
     
     }
