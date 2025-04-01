@@ -53,5 +53,12 @@ public class Accounts_Service {
     public List<Account> findAll () {
         return accounts_Repository.findAll();
     }
+
+
+
+    // add new account
+    public void addAccount ( Account account ) {
+        accounts_Repository.save(account);
+    }
     
 }

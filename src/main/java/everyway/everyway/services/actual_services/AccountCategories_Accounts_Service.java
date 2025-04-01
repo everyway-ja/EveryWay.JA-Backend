@@ -30,4 +30,11 @@ public class AccountCategories_Accounts_Service {
         return accountCategories_Accounts_Repository.findAll();
     }
 
+
+
+    // add new account category - account
+    public void addAssociation ( AccountCategory_Account accountCategory_Account ) {
+        accountCategories_Accounts_Repository.save(accountCategory_Account);
+    }
+
 }
