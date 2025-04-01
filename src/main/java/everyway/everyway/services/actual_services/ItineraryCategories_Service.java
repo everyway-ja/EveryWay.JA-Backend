@@ -24,4 +24,6 @@ public class ItineraryCategories_Service {
         return itineraryCategories_Repsitory.findAll();
     }
     
+    // any other method for this specific object is useless: addition, deletion and update should be performed directly on the database
+    
 }

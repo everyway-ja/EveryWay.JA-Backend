@@ -24,4 +24,6 @@ public class LocationCategories_Service {
         return locationCategories_Repository.findAll();
     }
     
+    // any other method for this specific object is useless: addition, deletion and update should be performed directly on the database
+
 }
