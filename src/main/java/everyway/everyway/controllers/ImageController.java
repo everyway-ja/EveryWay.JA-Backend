@@ -19,10 +19,10 @@ import org.apache.commons.io.FilenameUtils;
 // TODO : THE UPLOAD AND DOWNLOAD METHODS ARE NOT SECURE, ADD SECURITY CHECKS, VALIDATION, EXCEPTION HANDLING AND DISTINCTIONS FOR DIFFERENT TYPES OF IMAGES UPLOADS AND DOWNLAODS (profile pictures, itinerary pictures, etc.)
 
 @Controller
+
 public class ImageController {
 
-    @Value("${file.upload.path}") 
-    private String uploadPath;
+    @Value("${file.upload.path}")  private String uploadPath;
 
     @PostMapping("/upload")
     public ResponseEntity<String> handle_fileUpload ( @RequestParam("file") MultipartFile file ) {
@@ -40,7 +40,7 @@ public class ImageController {
         
         } 
         
-        catch (IOException e) {
+        catch ( IOException e ) {
             e.printStackTrace();
             return new ResponseEntity<>("Error.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -58,7 +58,7 @@ public class ImageController {
 
         try {
     
-            for (MultipartFile file : files) {
+            for ( MultipartFile file : files ) {
     
                 save_file(file);
                 // TODO : generate images' description
@@ -69,7 +69,7 @@ public class ImageController {
     
         } 
         
-        catch (IOException e) {
+        catch ( IOException e ) {
             e.printStackTrace();
             return new ResponseEntity<>("Error.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -89,7 +89,7 @@ public class ImageController {
     
         } 
         
-        catch (IOException e) {
+        catch ( IOException e ) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -109,7 +109,7 @@ public class ImageController {
         
         } 
         
-        catch (IOException e) {
+        catch ( IOException e ) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -182,7 +182,7 @@ public class ImageController {
     
         } 
         
-        catch (Exception e) {
+        catch ( Exception e ) {
             throw new RuntimeException();
         }
     

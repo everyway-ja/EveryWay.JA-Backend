@@ -2,7 +2,7 @@ package everyway.everyway.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import actual_services.*;
+import everyway.everyway.services.actual_services.*;
 
 @Service 
 @RequiredArgsConstructor

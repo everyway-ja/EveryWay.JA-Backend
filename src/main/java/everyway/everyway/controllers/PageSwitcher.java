@@ -12,7 +12,7 @@ public class PageSwitcher {
 
     // TOCHECK DA RIMUOVERE A TEMPO DEBITO
     @GetMapping("/")
-    public ResponseEntity<String> index() {
+    public ResponseEntity<String> index () {
         ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.ok();
         ResponseEntity<String> response = responseBuilder.body("{'message': 'Backend funzionante'}");
         return response;
