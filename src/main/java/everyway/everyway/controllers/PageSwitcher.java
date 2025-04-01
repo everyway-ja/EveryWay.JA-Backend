@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 
 @Controller
 
-public class MainController {
+public class PageSwitcher {
 
     // TOCHECK DA RIMUOVERE A TEMPO DEBITO
     @GetMapping("/")

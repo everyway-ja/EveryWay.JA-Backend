@@ -1,3 +1,4 @@
+
 package everyway.everyway.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
