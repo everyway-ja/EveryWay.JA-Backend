@@ -9,6 +9,8 @@ import everyway.everyway.services.actual_services.*;
 import everyway.everyway.models.tables.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 @Controller
 
@@ -36,9 +38,25 @@ public class FunctionalitiesController {
     private final Locations_Itineraries_Accounts_Service locations_Itineraries_Accounts_Service = new Locations_Itineraries_Accounts_Service();
     private final Positions_Service positions_Service = new Positions_Service();
     private final Reviews_Service reviews_Service = new Reviews_Service();
+    
 
 
-
+    private String encryptPassword ( String password ) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes());
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error encrypting password", e);
+        }
+    }
+    
     // login
     @PostMapping("/login")
     public String login ( 
@@ -50,7 +68,17 @@ public class FunctionalitiesController {
         List<Account> account = accounts_Service.findByUsername(username);
         Account pickedAccount = account.get(0);
 
-        Account loggedAccount = accounts_Service.findByIdAndPassword(pickedAccount.getId(), password);
+        if ( pickedAccount == null ) {
+            return "redirect:/login?error=true";
+        }
+        if ( pickedAccount.getDeletion_timestamp() != null ) {
+            return "redirect:/login?error=true";
+        }
+
+        // encrypt password and compare with the one in the database
+        String encryptedPassword = encryptPassword(password);
+
+        Account loggedAccount = accounts_Service.findByIdAndPassword(pickedAccount.getId(), encryptedPassword);
         if ( loggedAccount != null ) {
             session.setAttribute("loggedAccount", loggedAccount);
             return "redirect:/home";
@@ -81,7 +109,10 @@ public class FunctionalitiesController {
         newAccount.setSurname(surname);
         newAccount.setUsername(username);
         newAccount.setEmail(email);
-        newAccount.setPassword(password);
+
+        String encryptedPassword = encryptPassword(password);
+        newAccount.setPassword(encryptedPassword);
+        
         newAccount.setBirthDate(birthDate);
         newAccount.setAssociatedLanguage(associatedLanguage);
         newAccount.setAssociatedImage(associatedImage);
