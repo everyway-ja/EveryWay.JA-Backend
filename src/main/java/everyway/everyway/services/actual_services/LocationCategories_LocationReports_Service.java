@@ -29,4 +29,5 @@ public class LocationCategories_LocationReports_Service {
     public List<LocationCategory_LocationReport> findAll () {
         return locationCategories_LocationReports_Repository.findAll();
     }
+    
 }

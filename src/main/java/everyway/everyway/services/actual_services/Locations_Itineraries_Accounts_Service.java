@@ -35,4 +35,5 @@ public class Locations_Itineraries_Accounts_Service {
     public List<Location_Itinerary_Account> findAll () {
         return locations_Itineraries_Accounts_Repository.findAll();
     }
+    
 }

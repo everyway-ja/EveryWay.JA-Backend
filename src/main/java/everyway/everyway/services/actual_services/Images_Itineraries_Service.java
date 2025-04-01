@@ -29,4 +29,5 @@ public class Images_Itineraries_Service {
     public List<Image_Itinerary> findAll () {
         return images_Itineraries_Repository.findAll();
     }
+    
 }

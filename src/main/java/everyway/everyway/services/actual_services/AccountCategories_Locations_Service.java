@@ -29,4 +29,5 @@ public class AccountCategories_Locations_Service {
     public List<AccountCategory_Location> findAll () {
         return accountCategories_Locations_Repository.findAll();
     }
+
 }

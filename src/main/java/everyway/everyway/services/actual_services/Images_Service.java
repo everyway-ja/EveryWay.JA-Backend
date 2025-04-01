@@ -4,10 +4,10 @@ import everyway.everyway.models.tables.Image;
 import everyway.everyway.repositories.Images_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
+
 public class Images_Service {
 
     @Autowired private Images_Repository images_Repository;
@@ -23,4 +23,5 @@ public class Images_Service {
     public List<Image> findByDescription ( String description ) {
         return images_Repository.findByDescription(description);
     }
+
 }

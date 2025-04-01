@@ -23,4 +23,5 @@ public class LocationCategories_Service {
     public List<LocationCategory> findAll () {
         return locationCategories_Repository.findAll();
     }
+    
 }

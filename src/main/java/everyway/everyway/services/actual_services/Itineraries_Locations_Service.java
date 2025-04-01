@@ -29,4 +29,5 @@ public class Itineraries_Locations_Service {
     public List<Itinerary_Location> findAll () {
         return itineraries_Locations_Repository.findAll();
     }
+    
 }

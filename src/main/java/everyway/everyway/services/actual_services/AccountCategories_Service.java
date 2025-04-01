@@ -23,4 +23,5 @@ public class AccountCategories_Service {
     public List<AccountCategory> findAll () {
         return accountCategories_Repository.findAll();
     }
+
 }

@@ -23,4 +23,5 @@ public class ItineraryCategories_Service {
     public List<ItineraryCategory> findAll () {
         return itineraryCategories_Repsitory.findAll();
     }
+    
 }

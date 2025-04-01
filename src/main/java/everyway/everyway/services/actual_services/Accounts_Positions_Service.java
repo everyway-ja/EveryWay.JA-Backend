@@ -30,4 +30,5 @@ public class Accounts_Positions_Service {
     public List<Account_Position> findAll () {
         return accounts_Positions_Repository.findAll();
     }
+    
 }

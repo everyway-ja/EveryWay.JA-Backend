@@ -32,4 +32,5 @@ public class Itineraries_Service {
     public List<Itinerary> findAll () {
         return itineraries_Repositories.findAll();
     }
+    
 }

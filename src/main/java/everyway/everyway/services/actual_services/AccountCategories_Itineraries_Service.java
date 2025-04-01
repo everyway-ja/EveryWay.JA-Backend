@@ -29,4 +29,5 @@ public class AccountCategories_Itineraries_Service {
     public List<AccountCategory_Itinerary> findAll () {
         return accountCategories_Itineraries_Repository.findAll();
     }
+    
 }
