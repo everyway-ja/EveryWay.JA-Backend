@@ -4,7 +4,7 @@ import everyway.everyway.models.ids.AccountCategory_AccountId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +22,7 @@ import jakarta.persistence.IdClass;
 
 public class AccountCategory_Account {
 
-    @Id @OneToOne @JoinColumn(name="id_accountcategories") private AccountCategory associatedAccountCategory;
-    @Id @OneToOne @JoinColumn(name="id_account") private Account associatedAccount;
+    @Id @ManyToOne @JoinColumn(name="id_accountcategories") private AccountCategory associatedAccountCategory;
+    @Id @ManyToOne @JoinColumn(name="id_account") private Account associatedAccount;
 
 }

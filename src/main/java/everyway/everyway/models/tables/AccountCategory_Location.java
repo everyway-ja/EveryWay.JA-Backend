@@ -17,7 +17,7 @@ import lombok.Setter;
 
 public class AccountCategory_Location {
     
-    @Id @OneToOne @JoinColumn(name="id_accountcategory") private AccountCategory associatedAccountCategory;
-    @Id @OneToOne @JoinColumn(name="id_location") private Location associatedLocation;
+    @Id @ManyToOne @JoinColumn(name="id_accountcategory") private AccountCategory associatedAccountCategory;
+    @Id @ManyToOne @JoinColumn(name="id_location") private Location associatedLocation;
 
 }
