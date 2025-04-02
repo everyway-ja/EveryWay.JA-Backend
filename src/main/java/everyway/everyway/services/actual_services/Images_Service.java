@@ -32,14 +32,4 @@ public class Images_Service {
         return images_Repository.findByImagePath(imagePath);
     }
 
-    /**
-     * Retrieves all images with a specific description.
-     *
-     * @param description The description to filter images by.
-     * @return List<Image> - A list of Image objects that match the specified description.
-     */
-    public List<Image> findByDescription ( String description ) {
-        return images_Repository.findByDescription(description);
-    }
-
 }

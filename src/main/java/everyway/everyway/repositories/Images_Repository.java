@@ -12,6 +12,5 @@ public interface Images_Repository extends JpaRepository<Image, Integer> {
     Image findById(int id);
 
     List<Image> findByImagePath(String imagePath);
-    List<Image> findByDescription(String description);
 
 }
