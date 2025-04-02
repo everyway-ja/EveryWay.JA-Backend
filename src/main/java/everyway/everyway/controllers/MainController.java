@@ -144,13 +144,11 @@ public class MainController {
         HttpSession session 
     ) {
 
-        // check if username is already taken
         List<Account> existingAccount = accounts_Service.findByUsername(username);
         if ( !existingAccount.isEmpty() ) {
             return "redirect:/register?error=true";
         }
 
-        // set up new account
         Account newAccount = new Account();
         newAccount.setName(name);
         newAccount.setSurname(surname);
@@ -164,7 +162,6 @@ public class MainController {
         newAccount.setAssociatedLanguage(associatedLanguage);
         newAccount.setAssociatedImage(associatedImage);
         
-        // link the new account with the selected account categories
         accounts_Service.addAccount(newAccount);
         for ( AccountCategory accountCategory : associatedAccountCategories ) {
             accountCategories_Accounts_Service.addAssociation( new AccountCategory_Account(accountCategory, newAccount) );
@@ -240,7 +237,6 @@ public class MainController {
         HttpSession session 
     ) {
 
-        // set up new itinerary
         Itinerary newItinerary = new Itinerary();
         newItinerary.setName(name);
         newItinerary.setDescription(description);
@@ -248,22 +244,18 @@ public class MainController {
 
         itineraries_Service.addItinerary(newItinerary);
 
-        // link the images
         for ( Image image : associatedImages ) {
             images_Itineraries_Service.addAssociation( new Image_Itinerary(image, newItinerary) );
         }
 
-        // link the locations
         for ( Location location : associatedLocations ) {
             itineraries_Locations_Service.addAssociation( new Itinerary_Location(newItinerary, location, associatedLocations.indexOf(location)) );
         }
 
-        // link the account categorie
         for ( AccountCategory accountCategory : associatedAccountCategories ) {
             accountCategories_Itineraries_Service.addAssociation( new AccountCategory_Itinerary(accountCategory, newItinerary) );
         }
 
-        // link the itinerary categories
         for ( ItineraryCategory itineraryCategory : associatedItineraryCategories ) {
             itineraryCategories_Itineraries_Service.addAssociation( new ItineraryCategory_Itinerary(itineraryCategory, newItinerary) );
         }
@@ -272,26 +264,29 @@ public class MainController {
 
     }
 
-    @PostMapping("/contact")
-    public ResponseEntity<Map<String, String>> send_contact(@RequestParam String name, @RequestParam String email, @RequestParam String message) {
+    @PostMapping("/sendEmail")
+    public ResponseEntity<Map<String, String>> send_email ( @RequestParam String name , @RequestParam String email , @RequestParam String message ) {
+        
         Map<String, String> response = new HashMap<>();
 
-        // Controlla se i campi sono vuoti
         if (name.strip().isEmpty() || email.strip().isEmpty() || message.strip().isEmpty()) {
             response.put("error", "Nome, email o messaggio non possono essere vuoti.");
-            return ResponseEntity.badRequest().body(response);  // Restituisce 400 con il corpo JSON
+            return ResponseEntity.badRequest().body(response);
         }
 
         try {
-            utils.sendEmail(name, email, message);
 
-            // Se tutto va a buon fine, ritorna una risposta con codice 200 (OK)
+            utils.sendEmail(name, email, message);
             response.put("message", "Email inviata con successo.");
-            return ResponseEntity.ok(response);  // Restituisce 200 con il corpo JSON
-        } catch (Exception e) {
+            return ResponseEntity.ok(response);
+        
+        } 
+        
+        catch ( Exception e ) {
             response.put("error", e.toString());
             return ResponseEntity.badRequest().body(response);
         }
+    
     }
     
 }
