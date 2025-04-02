@@ -93,12 +93,11 @@ public class MainController {
 
 
 
-    // METHODS THAT THE FRONTEND MUST IMPLEMENT
+    //! METHODS THAT THE FRONTEND MUST IMPLEMENT
 
 
 
-    // METHODS THAT THE BACKEND MUST IMPLEMENT
-    //. login and registration methods
+    //! METHODS THAT THE BACKEND MUST IMPLEMENT
     @PostMapping("/login")
     public String login ( 
         @RequestParam String username , 
@@ -175,7 +174,6 @@ public class MainController {
 
     }
 
-    //. images-related methods
     @PostMapping("/upload")
     public ResponseEntity<String> handle_fileUpload ( @RequestParam("file") MultipartFile file ) {
         
@@ -228,7 +226,6 @@ public class MainController {
     
     }
 
-    //. 
     @PostMapping("/addItinerary")
     public String add_itinerary (
         @RequestParam String name , 
