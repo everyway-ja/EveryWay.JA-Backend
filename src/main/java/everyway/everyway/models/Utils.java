@@ -10,13 +10,20 @@ import java.security.NoSuchAlgorithmException;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 
 @Component
 
 public class Utils {
     
     @Value("${file.upload.path}")  private String uploadPath;
+    @Value("${file.personal.email}")  private String personalEmail;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     public String encryptString ( String password ) {
         try {
@@ -104,5 +111,14 @@ public class Utils {
             throw new RuntimeException();
         }
     
+    }
+
+    public void sendEmail(String nome, String email, String messaggio) {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(personalEmail);
+        mailMessage.setSubject("Nuovo contatto da "+nome);
+        mailMessage.setText("Nome: " + nome + "\nEmail: " + email + "\nMessaggio: " + messaggio);
+
+        javaMailSender.send(mailMessage);
     }
 }

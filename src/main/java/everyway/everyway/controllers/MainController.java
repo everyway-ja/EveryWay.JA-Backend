@@ -1,7 +1,9 @@
 package everyway.everyway.controllers;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -268,6 +270,28 @@ public class MainController {
 
         return "redirect:/home";
 
+    }
+
+    @PostMapping("/contact")
+    public ResponseEntity<Map<String, String>> send_contact(@RequestParam String name, @RequestParam String email, @RequestParam String message) {
+        Map<String, String> response = new HashMap<>();
+
+        // Controlla se i campi sono vuoti
+        if (name.strip().isEmpty() || email.strip().isEmpty() || message.strip().isEmpty()) {
+            response.put("error", "Nome, email o messaggio non possono essere vuoti.");
+            return ResponseEntity.badRequest().body(response);  // Restituisce 400 con il corpo JSON
+        }
+
+        try {
+            utils.sendEmail(name, email, message);
+
+            // Se tutto va a buon fine, ritorna una risposta con codice 200 (OK)
+            response.put("message", "Email inviata con successo.");
+            return ResponseEntity.ok(response);  // Restituisce 200 con il corpo JSON
+        } catch (Exception e) {
+            response.put("error", e.toString());
+            return ResponseEntity.badRequest().body(response);
+        }
     }
     
 }
