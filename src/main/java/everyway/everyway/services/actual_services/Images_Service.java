@@ -13,30 +13,30 @@ public class Images_Service {
     @Autowired private Images_Repository images_Repository;
 
     /**
-     * Finds an Image by its unique ID.
+     * Retrieves an image by its unique identifier.
      *
-     * @param id the ID of the Image
-     * @return the Image with the given ID, or null if not found
+     * @param id The unique identifier of the image.
+     * @return Image - The Image object matching the given ID, or null if no match is found.
      */
     public Image findById ( int id ) {
         return images_Repository.findById(id);
     }
 
     /**
-     * Finds Images by their image path.
+     * Retrieves all images with a specific image path.
      *
-     * @param imagePath the image path to search for
-     * @return a list of Images that match the given image path
+     * @param imagePath The image path to filter images by.
+     * @return List<Image> - A list of Image objects that match the specified image path.
      */
     public List<Image> findByImagePath ( String imagePath ) {
         return images_Repository.findByImagePath(imagePath);
     }
 
     /**
-     * Finds Images by their description.
+     * Retrieves all images with a specific description.
      *
-     * @param description the description of the Image
-     * @return a list of Images that match the given description
+     * @param description The description to filter images by.
+     * @return List<Image> - A list of Image objects that match the specified description.
      */
     public List<Image> findByDescription ( String description ) {
         return images_Repository.findByDescription(description);

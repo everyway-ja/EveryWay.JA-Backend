@@ -14,49 +14,49 @@ public class Itineraries_Service {
     @Autowired private Itineraries_Repositories itineraries_Repositories;
 
     /**
-     * Finds an Itinerary by its ID.
+     * Retrieves an itinerary by its unique identifier.
      *
-     * @param id the ID of the Itinerary
-     * @return the Itinerary that matches the given ID
+     * @param id The unique identifier of the itinerary.
+     * @return Itinerary - The Itinerary object matching the given ID, or null if no match is found.
      */
     public Itinerary findById ( int id ) {
         return itineraries_Repositories.findById(id);
     }
 
     /**
-     * Finds Itineraries by their name.
+     * Retrieves all itineraries with a specific name.
      *
-     * @param name the name of the Itinerary
-     * @return a list of Itineraries that match the given name
+     * @param name The name to filter itineraries by.
+     * @return List<Itinerary> - A list of Itinerary objects that match the specified name.
      */
     public List<Itinerary> findByName ( String name ) {
         return itineraries_Repositories.findByName(name);
     }
 
     /**
-     * Finds Itineraries by their description.
+     * Retrieves all itineraries with a specific description.
      *
-     * @param description the description of the Itinerary
-     * @return a list of Itineraries that match the given description
+     * @param description The description to filter itineraries by.
+     * @return List<Itinerary> - A list of Itinerary objects that match the specified description.
      */
     public List<Itinerary> findByDescription ( String description ) {
         return itineraries_Repositories.findByDescription(description);
     }
 
     /**
-     * Finds Itineraries by the associated Account.
+     * Retrieves all itineraries associated with a specific account.
      *
-     * @param account the associated Account
-     * @return a list of Itineraries associated with the given Account
+     * @param account The Account object to filter itineraries by.
+     * @return List<Itinerary> - A list of Itinerary objects linked to the specified account.
      */
     public List<Itinerary> findByAssociatedAccount ( Account account ) {
         return itineraries_Repositories.findByAssociatedAccount(account);
     }
 
     /**
-     * Finds all Itineraries.
+     * Retrieves all itineraries stored in the database.
      *
-     * @return a list of all Itineraries
+     * @return List<Itinerary> - A list of all Itinerary objects.
      */
     public List<Itinerary> findAll () {
         return itineraries_Repositories.findAll();

@@ -15,110 +15,110 @@ public class Accounts_Service {
     @Autowired private Accounts_Repository accounts_Repository;
 
     /**
-     * Finds an Account by its ID.
+     * Retrieves an account by its unique identifier.
      *
-     * @param id the ID of the Account
-     * @return the Account with the specified ID, or null if not found
+     * @param id The unique identifier of the account.
+     * @return Account - The Account object matching the given ID, or null if no match is found.
      */
     public Account findById ( int id ) {
         return accounts_Repository.findById(id);
     }
 
     /**
-     * Finds an Account by its ID and password.
+     * Retrieves an account by its unique identifier and password.
      *
-     * @param id the ID of the Account
-     * @param password the password of the Account
-     * @return the Account with the specified ID and password, or null if not found
+     * @param id The unique identifier of the account.
+     * @param password The password of the account.
+     * @return Account - The Account object matching the given ID and password, or null if no match is found.
      */
     public Account findByIdAndPassword ( int id , String password ) {
         return accounts_Repository.findByIdAndPassword(id, password);
     }
 
     /**
-     * Finds all Accounts by the name of the Account holder.
+     * Retrieves all accounts with a specific name.
      *
-     * @param name the name of the Account holder
-     * @return a list of Accounts with the specified name
+     * @param name The name to filter accounts by.
+     * @return List<Account> - A list of Account objects that match the specified name.
      */
     public List<Account> findByName ( String name ) {
         return accounts_Repository.findByName(name);
     }
 
     /**
-     * Finds all Accounts by the surname of the Account holder.
+     * Retrieves all accounts with a specific surname.
      *
-     * @param surname the surname of the Account holder
-     * @return a list of Accounts with the specified surname
+     * @param surname The surname to filter accounts by.
+     * @return List<Account> - A list of Account objects that match the specified surname.
      */
     public List<Account> findBySurname ( String surname ) {
         return accounts_Repository.findBySurname(surname);
     }
 
     /**
-     * Finds all Accounts by the username.
+     * Retrieves all accounts with a specific username.
      *
-     * @param username the username associated with the Account
-     * @return a list of Accounts with the specified username
+     * @param username The username to filter accounts by.
+     * @return List<Account> - A list of Account objects that match the specified username.
      */
     public List<Account> findByUsername ( String username ) {
         return accounts_Repository.findByUsername(username);
     }
 
     /**
-     * Finds all Accounts by the email address.
+     * Retrieves all accounts with a specific email address.
      *
-     * @param email the email address associated with the Account
-     * @return a list of Accounts with the specified email address
+     * @param email The email address to filter accounts by.
+     * @return List<Account> - A list of Account objects that match the specified email address.
      */
     public List<Account> findByEmail ( String email ) {
         return accounts_Repository.findByEmail(email);
     }
 
     /**
-     * Finds all Accounts by the birth date.
+     * Retrieves all accounts with a specific birth date.
      *
-     * @param birthDate the birth date of the Account holder
-     * @return a list of Accounts with the specified birth date
+     * @param birthDate The birth date to filter accounts by.
+     * @return List<Account> - A list of Account objects that match the specified birth date.
      */
     public List<Account> findByBirthDate ( Date birthDate ) {
         return accounts_Repository.findByBirthDate(birthDate);
     }
 
     /**
-     * Finds all Accounts associated with a specific Language.
+     * Retrieves all accounts associated with a specific language.
      *
-     * @param language the Language associated with the Account
-     * @return a list of Accounts associated with the specified Language
+     * @param language The Language object to filter accounts by.
+     * @return List<Account> - A list of Account objects linked to the specified language.
      */
     public List<Account> findByAssociatedLanguage ( Language language ) {
         return accounts_Repository.findByAssociatedLanguage(language);
     }
 
     /**
-     * Finds all Accounts by both the name and surname of the Account holder.
+     * Retrieves all accounts with a specific name and surname.
      *
-     * @param name the name of the Account holder
-     * @param surname the surname of the Account holder
-     * @return a list of Accounts with the specified name and surname
+     * @param name The name to filter accounts by.
+     * @param surname The surname to filter accounts by.
+     * @return List<Account> - A list of Account objects that match the specified name and surname.
      */
     public List<Account> findByNameAndSurname ( String name, String surname ) {
         return accounts_Repository.findByNameAndSurname(name, surname);
     }
 
     /**
-     * Retrieves all Accounts from the repository.
+     * Retrieves all accounts stored in the database.
      *
-     * @return a list of all Accounts in the repository
+     * @return List<Account> - A list of all Account objects.
      */
     public List<Account> findAll () {
         return accounts_Repository.findAll();
     }
 
     /**
-     * Adds a new Account to the repository.
+     * Adds a new account to the database.
      *
-     * @param account the Account to be added
+     * @param account The Account object to be added.
      */
     public void addAccount ( Account account ) {
         accounts_Repository.save(account);

@@ -15,40 +15,40 @@ public class AccountCategories_Locations_Service {
     @Autowired private AccountCategories_Locations_Repository accountCategories_Locations_Repository;
 
     /**
-     * Finds an account category-location association by the associated account category and associated location.
+     * Finds an AccountCategory_Location association by the associated account category and location.
      *
-     * @param associatedAccountCategory the account category to search by
-     * @param associatedLocation the location to search by
-     * @return the associated AccountCategory_Location object if found, otherwise null
+     * @param associatedAccountCategory The AccountCategory object to filter by.
+     * @param associatedLocation The Location object to filter by.
+     * @return AccountCategory_Location - The association matching the given account category and location, or null if no match is found.
      */
     public AccountCategory_Location findByAssociatedAccountCategoryAndAssociatedLocation ( AccountCategory associatedAccountCategory , Location associatedLocation ) {
         return accountCategories_Locations_Repository.findByAssociatedAccountCategoryAndAssociatedLocation(associatedAccountCategory, associatedLocation);
     }
 
     /**
-     * Finds all account category-location associations for the specified account category.
+     * Retrieves all AccountCategory_Location associations for a specific account category.
      *
-     * @param associatedAccountCategory the account category to search by
-     * @return a list of AccountCategory_Location objects associated with the given account category
+     * @param associatedAccountCategory The AccountCategory object to filter by.
+     * @return List<AccountCategory_Location> - A list of AccountCategory_Location associations linked to the specified account category.
      */
     public List<AccountCategory_Location> findByAssociatedAccountCategory ( AccountCategory associatedAccountCategory ) {
         return accountCategories_Locations_Repository.findByAssociatedAccountCategory(associatedAccountCategory);
     }
 
     /**
-     * Finds all account category-location associations for the specified location.
+     * Retrieves all AccountCategory_Location associations for a specific location.
      *
-     * @param associatedLocation the location to search by
-     * @return a list of AccountCategory_Location objects associated with the given location
+     * @param associatedLocation The Location object to filter by.
+     * @return List<AccountCategory_Location> - A list of AccountCategory_Location associations linked to the specified location.
      */
     public List<AccountCategory_Location> findByAssociatedLocation ( Location associatedLocation ) {
         return accountCategories_Locations_Repository.findByAssociatedLocation(associatedLocation);
     }
 
     /**
-     * Retrieves all account category-location associations.
+     * Retrieves all AccountCategory_Location associations stored in the database.
      *
-     * @return a list of all AccountCategory_Location associations
+     * @return List<AccountCategory_Location> - A list of all AccountCategory_Location associations.
      */
     public List<AccountCategory_Location> findAll () {
         return accountCategories_Locations_Repository.findAll();

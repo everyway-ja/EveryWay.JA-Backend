@@ -17,38 +17,38 @@ public class ItineraryCategories_Itineraries_Service {
     /**
      * Finds a specific ItineraryCategory_Itinerary association by the associated category and itinerary.
      *
-     * @param category the ItineraryCategory
-     * @param itinerary the Itinerary
-     * @return the ItineraryCategory_Itinerary that associates the given category with the itinerary
+     * @param category The ItineraryCategory object to filter by.
+     * @param itinerary The Itinerary object to filter by.
+     * @return ItineraryCategory_Itinerary - The association matching the given category and itinerary, or null if no match is found.
      */
     public ItineraryCategory_Itinerary findByAssociatedItineraryCategoryAndAssociatedItinerary ( ItineraryCategory category , Itinerary itinerary ) {
         return itineraryCategories_Itineraries_Repository.findByAssociatedItineraryCategoryAndAssociatedItinerary(category, itinerary);
     }
 
     /**
-     * Finds all ItineraryCategory_Itinerary associations for a given ItineraryCategory.
+     * Retrieves all ItineraryCategory_Itinerary associations for a specific category.
      *
-     * @param category the ItineraryCategory
-     * @return a list of ItineraryCategory_Itinerary associations linked to the given category
+     * @param category The ItineraryCategory object to filter by.
+     * @return List<ItineraryCategory> - A list of ItineraryCategory_Itinerary associations linked to the specified category.
      */
     public List<ItineraryCategory> findByAssociatedItineraryCategory ( ItineraryCategory category ) {
         return itineraryCategories_Itineraries_Repository.findByAssociatedItineraryCategory(category);
     }
 
     /**
-     * Finds all ItineraryCategory_Itinerary associations for a given Itinerary.
+     * Retrieves all ItineraryCategory_Itinerary associations for a specific itinerary.
      *
-     * @param itinerary the Itinerary
-     * @return a list of ItineraryCategory_Itinerary associations linked to the given itinerary
+     * @param itinerary The Itinerary object to filter by.
+     * @return List<Itinerary> - A list of ItineraryCategory_Itinerary associations linked to the specified itinerary.
      */
     public List<Itinerary> findByAssociatedItinerary ( Itinerary itinerary ) {
         return itineraryCategories_Itineraries_Repository.findByAssociatedItinerary(itinerary);
     }
 
     /**
-     * Finds all ItineraryCategory_Itinerary associations.
+     * Retrieves all ItineraryCategory_Itinerary associations stored in the database.
      *
-     * @return a list of all ItineraryCategory_Itinerary associations
+     * @return List<ItineraryCategory_Itinerary> - A list of all ItineraryCategory_Itinerary associations.
      */
     public List<ItineraryCategory_Itinerary> findAll () {
         return itineraryCategories_Itineraries_Repository.findAll();

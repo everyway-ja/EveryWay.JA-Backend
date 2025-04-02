@@ -15,46 +15,44 @@ public class Itineraries_Locations_Service {
     @Autowired private Itineraries_Locations_Repository itineraries_Locations_Repository;
 
     /**
-     * Finds an Itinerary_Location by its associated Itinerary and Location.
+     * Finds an Itinerary_Location association by the associated itinerary and location.
      *
-     * @param itinerary the associated Itinerary
-     * @param location the associated Location
-     * @return the Itinerary_Location that matches the given Itinerary and Location
+     * @param itinerary The Itinerary object to filter by.
+     * @param location The Location object to filter by.
+     * @return Itinerary_Location - The association matching the given itinerary and location, or null if no match is found.
      */
     public Itinerary_Location findByAssociatedItineraryAndAssociatedLocation ( Itinerary itinerary , Location location ) {
         return itineraries_Locations_Repository.findByAssociatedItineraryAndAssociatedLocation(itinerary, location);
     }
 
     /**
-     * Finds Itinerary_Location entities by their associated Itinerary.
+     * Retrieves all Itinerary_Location associations for a specific itinerary.
      *
-     * @param itinerary the associated Itinerary
-     * @return a list of Itinerary_Location entities associated with the given Itinerary
+     * @param itinerary The Itinerary object to filter by.
+     * @return List<Itinerary> - A list of Itinerary_Location associations linked to the specified itinerary.
      */
     public List<Itinerary> findByAssociatedItinerary ( Itinerary itinerary ) {
         return itineraries_Locations_Repository.findByAssociatedItinerary(itinerary);
     }
 
     /**
-     * Finds Itinerary_Location entities by their associated Location.
+     * Retrieves all Itinerary_Location associations for a specific location.
      *
-     * @param location the associated Location
-     * @return a list of Itinerary_Location entities associated with the given Location
+     * @param location The Location object to filter by.
+     * @return List<Location> - A list of Itinerary_Location associations linked to the specified location.
      */
     public List<Location> findByAssociatedLocation ( Location location ) {
         return itineraries_Locations_Repository.findByAssociatedLocation(location);
     }
 
     /**
-     * Finds all Itinerary_Location entities.
+     * Retrieves all Itinerary_Location associations stored in the database.
      *
-     * @return a list of all Itinerary_Location entities
+     * @return List<Itinerary_Location> - A list of all Itinerary_Location associations.
      */
     public List<Itinerary_Location> findAll () {
         return itineraries_Locations_Repository.findAll();
     }
-
-
 
     // add a new association between itinerary and location
     public Itinerary_Location addAssociation ( Itinerary_Location itinerary_location ) {

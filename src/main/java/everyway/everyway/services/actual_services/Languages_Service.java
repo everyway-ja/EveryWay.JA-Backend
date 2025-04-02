@@ -13,47 +13,39 @@ public class Languages_Service {
     @Autowired private Languages_Repository languages_Repository;
 
     /**
-     * Retrieves a language by its ID.
-     * 
-     * This method queries the repository to find a language with the specified ID.
-     * 
-     * @param id the ID of the language
-     * @return the language with the specified ID, or null if not found
+     * Retrieves a language by its unique identifier.
+     *
+     * @param id The unique identifier of the language.
+     * @return Language - The Language object matching the given ID, or null if no match is found.
      */
     public Language findById ( int id ) {
         return languages_Repository.findById(id);
     }
 
     /**
-     * Retrieves a list of languages that match the given short description.
-     * 
-     * This method queries the repository to find all languages with the specified short description.
-     * 
-     * @param shortDescription the short description to match against
-     * @return a list of languages that match the short description
+     * Retrieves all languages with a specific short description.
+     *
+     * @param shortDescription The short description to filter languages by.
+     * @return List<Language> - A list of Language objects that match the specified short description.
      */
     public List<Language> findByShortDescription ( String shortDescription ) {
         return languages_Repository.findByShortDescription(shortDescription);
     }
 
     /**
-     * Retrieves a list of languages that match the given long description.
-     * 
-     * This method queries the repository to find all languages with the specified long description.
-     * 
-     * @param longDescription the long description to match against
-     * @return a list of languages that match the long description
+     * Retrieves all languages with a specific long description.
+     *
+     * @param longDescription The long description to filter languages by.
+     * @return List<Language> - A list of Language objects that match the specified long description.
      */
     public List<Language> findByLongDescription ( String longDescription ) {
         return languages_Repository.findByLongDescription(longDescription);
     }
 
     /**
-     * Retrieves a list of all languages.
-     * 
-     * This method queries the repository to return all the available languages.
-     * 
-     * @return a list of all languages
+     * Retrieves all languages stored in the database.
+     *
+     * @return List<Language> - A list of all Language objects.
      */
     public List<Language> findAll () {
         return languages_Repository.findAll();

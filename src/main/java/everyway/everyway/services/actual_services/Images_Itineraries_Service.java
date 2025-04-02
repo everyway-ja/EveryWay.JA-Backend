@@ -15,47 +15,45 @@ public class Images_Itineraries_Service {
     @Autowired private Images_Itineraries_Repository images_Itineraries_Repository;
 
     /**
-     * Finds an Image_Itinerary by the associated Image and Itinerary.
+     * Finds an Image_Itinerary association by the associated image and itinerary.
      *
-     * @param associatedImage the Image associated with the Image_Itinerary
-     * @param associatedItinerary the Itinerary associated with the Image_Itinerary
-     * @return the Image_Itinerary that matches both the associated Image and Itinerary, or null if not found
+     * @param associatedImage The Image object to filter by.
+     * @param associatedItinerary The Itinerary object to filter by.
+     * @return Image_Itinerary - The association matching the given image and itinerary, or null if no match is found.
      */
     public Image_Itinerary findByAssociatedImageAndAssociatedItinerary ( Image associatedImage , Itinerary associatedItinerary ) {
         return images_Itineraries_Repository.findByAssociatedImageAndAssociatedItinerary(associatedImage, associatedItinerary);
     }
 
     /**
-     * Finds all Image_Itinerary associations by the associated Image.
+     * Retrieves all Image_Itinerary associations for a specific image.
      *
-     * @param associatedImage the Image associated with the Image_Itinerary
-     * @return a list of Image_Itinerary associations with the specified Image
+     * @param associatedImage The Image object to filter by.
+     * @return List<Image_Itinerary> - A list of Image_Itinerary associations linked to the specified image.
      */
     public List<Image_Itinerary> findByAssociatedImage ( Image associatedImage ) {
         return images_Itineraries_Repository.findByAssociatedImage(associatedImage);
     }
 
     /**
-     * Finds all Image_Itinerary associations by the associated Itinerary.
+     * Retrieves all Image_Itinerary associations for a specific itinerary.
      *
-     * @param associatedItinerary the Itinerary associated with the Image_Itinerary
-     * @return a list of Image_Itinerary associations with the specified Itinerary
+     * @param associatedItinerary The Itinerary object to filter by.
+     * @return List<Image_Itinerary> - A list of Image_Itinerary associations linked to the specified itinerary.
      */
     public List<Image_Itinerary> findByAssociatedItinerary ( Itinerary associatedItinerary ) {
         return images_Itineraries_Repository.findByAssociatedItinerary(associatedItinerary);
     }
 
     /**
-     * Retrieves all Image_Itinerary associations from the repository.
+     * Retrieves all Image_Itinerary associations stored in the database.
      *
-     * @return a list of all Image_Itinerary associations
+     * @return List<Image_Itinerary> - A list of all Image_Itinerary associations.
      */
     public List<Image_Itinerary> findAll () {
         return images_Itineraries_Repository.findAll();
     }
 
-
-    
     // add a new association between an image and an itinerary
     public Image_Itinerary addAssociation ( Image_Itinerary image_Itinerary ) {
         return images_Itineraries_Repository.save(image_Itinerary);

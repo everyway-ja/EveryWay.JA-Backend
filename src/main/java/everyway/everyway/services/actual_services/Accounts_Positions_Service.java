@@ -16,41 +16,41 @@ public class Accounts_Positions_Service {
     @Autowired private Accounts_Positions_Repository accounts_Positions_Repository;
 
     /**
-     * Finds an Account_Position association based on the associated Account, Position, and creation timestamp.
+     * Finds an Account_Position association by the associated account, position, and creation timestamp.
      *
-     * @param account the associated Account
-     * @param position the associated Position
-     * @param creation_timestamp the timestamp when the association was created
-     * @return the Account_Position object that matches the given criteria, or null if not found
+     * @param account The Account object to filter by.
+     * @param position The Position object to filter by.
+     * @param creation_timestamp The timestamp to filter by.
+     * @return Account_Position - The association matching the given account, position, and timestamp, or null if no match is found.
      */
     public Account_Position findByAssociatedAccountAndAssociatedPositionAndCreationTimestamp ( Account account , Position position , LocalDateTime creation_timestamp ) {
         return accounts_Positions_Repository.findByAssociatedAccountAndAssociatedPositionAndCreationTimestamp(account, position, creation_timestamp);
     }
 
     /**
-     * Finds all Account_Position associations for a given Account.
+     * Retrieves all Account_Position associations for a specific account.
      *
-     * @param associatedAccount the Account to search for associated positions
-     * @return a list of Account_Position objects associated with the given Account
+     * @param associatedAccount The Account object to filter by.
+     * @return List<Account_Position> - A list of Account_Positions associations linked to the specified account.
      */
     public List<Account_Position> findByAssociatedAccount ( Account associatedAccount ) {
         return accounts_Positions_Repository.findByAssociatedAccount(associatedAccount);
     }
 
     /**
-     * Finds all Account_Position associations for a given Position.
+     * Retrieves all Account_Position associations for a specific position.
      *
-     * @param associatedPosition the Position to search for associated accounts
-     * @return a list of Account_Position objects associated with the given Position
+     * @param associatedPosition The Position object to filter by.
+     * @return List<Account_Position> - A list of Account_Position associations linked to the specified position.
      */
     public List<Account_Position> findByAssociatedPosition ( Position associatedPosition ) {
         return accounts_Positions_Repository.findByAssociatedPosition(associatedPosition);
     }
 
     /**
-     * Retrieves all Account_Position associations from the database.
+     * Retrieves all Account_Position associations stored in the database.
      *
-     * @return a list of all Account_Position objects in the database
+     * @return List<Account_Position> - A list of all Account_Position associations.
      */
     public List<Account_Position> findAll () {
         return accounts_Positions_Repository.findAll();

@@ -14,11 +14,9 @@ public class LocationCategories_Service {
 
     /**
      * Retrieves a location category by its ID.
-     * 
-     * This method queries the repository to find a location category with the specified ID.
-     * 
-     * @param id the ID of the location category to search for
-     * @return the location category with the specified ID, or null if not found
+     *
+     * @param id The unique identifier of the location category.
+     * @return LocationCategory - The location category with the specified ID, or null if not found.
      */
     public LocationCategory findById ( int id ) {
         return locationCategories_Repository.findById(id);
@@ -26,11 +24,9 @@ public class LocationCategories_Service {
 
     /**
      * Retrieves a list of location categories by the specified description.
-     * 
-     * This method queries the repository to find location categories with the given description.
-     * 
-     * @param description the description to search for
-     * @return a list of location categories that match the specified description
+     *
+     * @param description The description to filter location categories by.
+     * @return List<LocationCategory> - A list of location categories that match the specified description.
      */
     public List<LocationCategory> findByDescription ( String description ) {
         return locationCategories_Repository.findByDescription(description);
@@ -38,10 +34,8 @@ public class LocationCategories_Service {
 
     /**
      * Retrieves a list of all location categories.
-     * 
-     * This method queries the repository to return all available location categories in the database.
-     * 
-     * @return a list of all location categories
+     *
+     * @return List<LocationCategory> - A list of all location categories in the database.
      */
     public List<LocationCategory> findAll () {
         return locationCategories_Repository.findAll();

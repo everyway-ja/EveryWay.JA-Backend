@@ -18,15 +18,12 @@ public class Locations_Itineraries_Accounts_Service {
 
     /**
      * Retrieves a location-itinerary-account association by location, itinerary, account, and creation timestamp.
-     * 
-     * This method queries the repository to find an association with the specified location, itinerary, account,
-     * and creation timestamp.
-     * 
-     * @param location the location to search for
-     * @param itinerary the itinerary to search for
-     * @param account the account to search for
-     * @param creation_timestamp the creation timestamp to search for
-     * @return the location-itinerary-account association that matches the specified parameters, or null if not found
+     *
+     * @param location The Location object to filter by.
+     * @param itinerary The Itinerary object to filter by.
+     * @param account The Account object to filter by.
+     * @param creation_timestamp The creation timestamp to filter by.
+     * @return Location_Itinerary_Account - The matching association, or null if not found.
      */
     public Location_Itinerary_Account findByAssociatedLocationAndAssociatedItineraryAndAssociatedAccountAndCreationTimestamp ( Location location , Itinerary itinerary , Account account , LocalDateTime creation_timestamp ) {
         return locations_Itineraries_Accounts_Repository.findByAssociatedLocationAndAssociatedItineraryAndAssociatedAccountAndCreationTimestamp(location, itinerary, account, creation_timestamp);
@@ -34,11 +31,9 @@ public class Locations_Itineraries_Accounts_Service {
 
     /**
      * Retrieves a list of location-itinerary-account associations by location.
-     * 
-     * This method queries the repository to find associations with the specified location.
-     * 
-     * @param location the location to search for
-     * @return a list of location-itinerary-account associations that match the specified location
+     *
+     * @param location The Location object to filter by.
+     * @return List<Location_Itinerary_Account> - A list of associations matching the specified location.
      */
     public List<Location_Itinerary_Account> findByAssociatedLocation ( Location location ) {
         return locations_Itineraries_Accounts_Repository.findByAssociatedLocation(location);
@@ -46,11 +41,9 @@ public class Locations_Itineraries_Accounts_Service {
 
     /**
      * Retrieves a list of location-itinerary-account associations by itinerary.
-     * 
-     * This method queries the repository to find associations with the specified itinerary.
-     * 
-     * @param itinerary the itinerary to search for
-     * @return a list of location-itinerary-account associations that match the specified itinerary
+     *
+     * @param itinerary The Itinerary object to filter by.
+     * @return List<Location_Itinerary_Account> - A list of associations matching the specified itinerary.
      */
     public List<Location_Itinerary_Account> findByAssociatedItinerary ( Itinerary itinerary ) {
         return locations_Itineraries_Accounts_Repository.findByAssociatedItinerary(itinerary);
@@ -58,22 +51,18 @@ public class Locations_Itineraries_Accounts_Service {
 
     /**
      * Retrieves a list of location-itinerary-account associations by account.
-     * 
-     * This method queries the repository to find associations with the specified account.
-     * 
-     * @param account the account to search for
-     * @return a list of location-itinerary-account associations that match the specified account
+     *
+     * @param account The Account object to filter by.
+     * @return List<Location_Itinerary_Account> - A list of associations matching the specified account.
      */
     public List<Location_Itinerary_Account> findByAssociatedAccount ( Account account ) {
         return locations_Itineraries_Accounts_Repository.findByAssociatedAccount(account);
     }
 
     /**
-     * Retrieves a list of all location-itinerary-account associations.
-     * 
-     * This method queries the repository to return all available associations in the database.
-     * 
-     * @return a list of all location-itinerary-account associations
+     * Retrieves all location-itinerary-account associations.
+     *
+     * @return List<Location_Itinerary_Account> - A list of all associations in the database.
      */
     public List<Location_Itinerary_Account> findAll () {
         return locations_Itineraries_Accounts_Repository.findAll();

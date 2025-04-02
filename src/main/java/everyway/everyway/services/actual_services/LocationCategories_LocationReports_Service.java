@@ -16,12 +16,10 @@ public class LocationCategories_LocationReports_Service {
 
     /**
      * Retrieves a location category-location report association by the specified location category and location report.
-     * 
-     * This method queries the repository to find the association between the specified location category and location report.
-     * 
-     * @param category the location category to search for
-     * @param report the location report to search for
-     * @return the associated location category-location report, or null if no association is found
+     *
+     * @param category The location category to filter by.
+     * @param report The location report to filter by.
+     * @return LocationCategory_LocationReport - The associated location category-location report, or null if no association is found.
      */
     public LocationCategory_LocationReport findByAssociatedLocationCategoryAndAssociatedLocationReport ( LocationCategory category , LocationReport report ) {
         return locationCategories_LocationReports_Repository.findByAssociatedLocationCategoryAndAssociatedLocationReport(category, report);
@@ -29,11 +27,9 @@ public class LocationCategories_LocationReports_Service {
 
     /**
      * Retrieves a list of location category-location report associations by the specified location category.
-     * 
-     * This method queries the repository to find all associations that involve the specified location category.
-     * 
-     * @param category the location category to search for
-     * @return a list of location category-location report associations
+     *
+     * @param category The location category to filter by.
+     * @return List<LocationCategory_LocationReport> - A list of associations involving the specified location category.
      */
     public List<LocationCategory_LocationReport> findByAssociatedLocationCategory ( LocationCategory category ) {
         return locationCategories_LocationReports_Repository.findByAssociatedLocationCategory(category);
@@ -41,11 +37,9 @@ public class LocationCategories_LocationReports_Service {
 
     /**
      * Retrieves a list of location category-location report associations by the specified location report.
-     * 
-     * This method queries the repository to find all associations that involve the specified location report.
-     * 
-     * @param report the location report to search for
-     * @return a list of location category-location report associations
+     *
+     * @param report The location report to filter by.
+     * @return List<LocationCategory_LocationReport> - A list of associations involving the specified location report.
      */
     public List<LocationCategory_LocationReport> findByAssociatedLocationReport ( LocationReport report ) {
         return locationCategories_LocationReports_Repository.findByAssociatedLocationReport(report);
@@ -53,10 +47,8 @@ public class LocationCategories_LocationReports_Service {
 
     /**
      * Retrieves a list of all location category-location report associations.
-     * 
-     * This method queries the repository to return all the available location category-location report associations.
-     * 
-     * @return a list of all location category-location report associations
+     *
+     * @return List<LocationCategory_LocationReport> - A list of all location category-location report associations.
      */
     public List<LocationCategory_LocationReport> findAll () {
         return locationCategories_LocationReports_Repository.findAll();
