@@ -10,11 +10,15 @@ import java.security.NoSuchAlgorithmException;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.Value;
 
 @Component
-public class Utils {
 
-    public String encryptPassword ( String password ) {
+public class Utils {
+    
+    @Value("${file.upload.path}")  private String uploadPath;
+
+    public String encryptString ( String password ) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(password.getBytes());
@@ -30,12 +34,12 @@ public class Utils {
         }
     }
 
-    public void save_file ( MultipartFile file, String uploadPath ) throws IOException {
+    public void save_file ( MultipartFile file ) throws IOException {
 
         byte[] fileBytes = file.getBytes();
         String fileHash = generate_fileHash(fileBytes);
     
-        Path path = get_filePath(fileHash, uploadPath);
+        Path path = get_filePath(fileHash);
         create_directoriesIfNotExist(path);
     
         if (!Files.exists(path)) {
@@ -51,21 +55,21 @@ public class Utils {
         }
     }
 
-    public byte[] read_file ( String filename, String uploadPath ) throws IOException {
+    public byte[] read_file ( String filename ) throws IOException {
         
-        Path path = get_filePath(filename, uploadPath);
+        Path path = get_filePath(filename);
 
         return Files.readAllBytes(path);
     
     }
 
-    public byte[] combine_files ( String[] filenames, String uploadPath ) throws IOException {
+    public byte[] combine_files ( String[] filenames ) throws IOException {
 
         int totalLength = 0;
         byte[][] fileContents = new byte[filenames.length][];
 
         for (int i = 0; i < filenames.length; i++) {
-            fileContents[i] = read_file(filenames[i], uploadPath);
+            fileContents[i] = read_file(filenames[i]);
             totalLength += fileContents[i].length;
         }
 
@@ -81,7 +85,7 @@ public class Utils {
 
     }
 
-    public Path get_filePath ( String filename, String uploadPath ) {
+    public Path get_filePath ( String filename ) {
         String sanitizedFilename = FilenameUtils.getName(filename);
         return Paths.get(uploadPath, sanitizedFilename);
     }

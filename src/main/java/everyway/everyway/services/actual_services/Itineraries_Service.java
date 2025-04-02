@@ -32,5 +32,11 @@ public class Itineraries_Service {
     public List<Itinerary> findAll () {
         return itineraries_Repositories.findAll();
     }
+
+
+    // add a new itinerary
+    public Itinerary addItinerary ( Itinerary itinerary ) {
+        return itineraries_Repositories.save(itinerary);
+    }
     
 }

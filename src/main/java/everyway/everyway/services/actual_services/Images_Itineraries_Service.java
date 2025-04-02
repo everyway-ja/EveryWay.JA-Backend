@@ -29,5 +29,12 @@ public class Images_Itineraries_Service {
     public List<Image_Itinerary> findAll () {
         return images_Itineraries_Repository.findAll();
     }
+
+
+    
+    // add a new association between an image and an itinerary
+    public Image_Itinerary addAssociation ( Image_Itinerary image_Itinerary ) {
+        return images_Itineraries_Repository.save(image_Itinerary);
+    }
     
 }

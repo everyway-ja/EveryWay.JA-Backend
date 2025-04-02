@@ -29,5 +29,12 @@ public class ItineraryCategories_Itineraries_Service {
     public List<ItineraryCategory_Itinerary> findAll () {
         return itineraryCategories_Itineraries_Repository.findAll();
     }
+
+
+
+    // add a new association between itinerary and category
+    public ItineraryCategory_Itinerary addAssociation ( ItineraryCategory_Itinerary itineraryCategory_Itinerary ) {
+        return itineraryCategories_Itineraries_Repository.save(itineraryCategory_Itinerary);
+    }
     
 }

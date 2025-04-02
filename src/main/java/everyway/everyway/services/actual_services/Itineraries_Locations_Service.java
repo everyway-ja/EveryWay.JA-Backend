@@ -29,5 +29,12 @@ public class Itineraries_Locations_Service {
     public List<Itinerary_Location> findAll () {
         return itineraries_Locations_Repository.findAll();
     }
+
+
+
+    // add a new association between itinerary and location
+    public Itinerary_Location addAssociation ( Itinerary_Location itinerary_location ) {
+        return itineraries_Locations_Repository.save(itinerary_location);
+    }
     
 }
