@@ -14,18 +14,42 @@ public class Itineraries_Locations_Service {
 
     @Autowired private Itineraries_Locations_Repository itineraries_Locations_Repository;
 
+    /**
+     * Finds an Itinerary_Location by its associated Itinerary and Location.
+     *
+     * @param itinerary the associated Itinerary
+     * @param location the associated Location
+     * @return the Itinerary_Location that matches the given Itinerary and Location
+     */
     public Itinerary_Location findByAssociatedItineraryAndAssociatedLocation ( Itinerary itinerary , Location location ) {
         return itineraries_Locations_Repository.findByAssociatedItineraryAndAssociatedLocation(itinerary, location);
     }
 
+    /**
+     * Finds Itinerary_Location entities by their associated Itinerary.
+     *
+     * @param itinerary the associated Itinerary
+     * @return a list of Itinerary_Location entities associated with the given Itinerary
+     */
     public List<Itinerary> findByAssociatedItinerary ( Itinerary itinerary ) {
         return itineraries_Locations_Repository.findByAssociatedItinerary(itinerary);
     }
 
+    /**
+     * Finds Itinerary_Location entities by their associated Location.
+     *
+     * @param location the associated Location
+     * @return a list of Itinerary_Location entities associated with the given Location
+     */
     public List<Location> findByAssociatedLocation ( Location location ) {
         return itineraries_Locations_Repository.findByAssociatedLocation(location);
     }
 
+    /**
+     * Finds all Itinerary_Location entities.
+     *
+     * @return a list of all Itinerary_Location entities
+     */
     public List<Itinerary_Location> findAll () {
         return itineraries_Locations_Repository.findAll();
     }
