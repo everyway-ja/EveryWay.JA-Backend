@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class FunctionalitiesController {
 
+    @Autowired private Utils utils;
     @Autowired private AccountCategories_Accounts_Service accountCategories_Accounts_Service;
     @Autowired private AccountCategories_Itineraries_Service accountCategories_Itineraries_Service;
     @Autowired private AccountCategories_LocationReports_Service accountCategories_LocationReports_Service;
