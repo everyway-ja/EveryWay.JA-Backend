@@ -1,5 +1,6 @@
 package everyway.everyway.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import org.apache.commons.io.FilenameUtils;
+import everyway.everyway.models.Utils;
 import everyway.everyway.services.actual_services.*;
 
 // TODO : THE UPLOAD AND DOWNLOAD METHODS ARE NOT SECURE, ADD SECURITY CHECKS, VALIDATION, EXCEPTION HANDLING AND DISTINCTIONS FOR DIFFERENT TYPES OF IMAGES UPLOADS AND DOWNLAODS (profile pictures, itinerary pictures, etc.)
@@ -23,6 +25,7 @@ import everyway.everyway.services.actual_services.*;
 
 public class ImageController {
 
+    @Autowired private Utils utils;
     @Value("${file.upload.path}")  private String uploadPath;
 
     @PostMapping("/upload")
@@ -34,7 +37,7 @@ public class ImageController {
 
         try {
         
-            save_file(file);
+            utils.save_file(file, uploadPath);
             // TODO : generate image description
 
             return new ResponseEntity<>("Success.", HttpStatus.OK);
@@ -61,7 +64,7 @@ public class ImageController {
     
             for ( MultipartFile file : files ) {
     
-                save_file(file);
+                utils.save_file(file, uploadPath);
                 // TODO : generate images' description
     
             }
@@ -82,7 +85,7 @@ public class ImageController {
     
         try {
     
-            byte[] file = read_file(filename);
+            byte[] file = utils.read_file(filename, uploadPath);
     
             ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.ok();
             responseBuilder.header("Content-Disposition", "attachment; filename=" + filename);
@@ -102,7 +105,7 @@ public class ImageController {
         
         try {
         
-            byte[] combinedFiles = combine_files(filenames);
+            byte[] combinedFiles = utils.combine_files(filenames, uploadPath);
         
             ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.ok();
             responseBuilder.header("Content-Disposition", "attachment; filename=files.zip");
@@ -116,77 +119,4 @@ public class ImageController {
         }
     
     }
-
-    private void save_file ( MultipartFile file ) throws IOException {
-
-        byte[] fileBytes = file.getBytes();
-        String fileHash = generate_fileHash(fileBytes);
-    
-        Path path = get_filePath(fileHash);
-        create_directoriesIfNotExist(path);
-    
-        if (!Files.exists(path)) {
-            Files.write(path, fileBytes);
-        }
-
-    }
-
-    private void create_directoriesIfNotExist ( Path path ) throws IOException {
-        Path directory = path.getParent();
-        if (directory != null && !Files.exists(directory)) {
-            Files.createDirectories(directory);
-        }
-    }
-
-    private byte[] read_file ( String filename ) throws IOException {
-        
-        Path path = get_filePath(filename);
-
-        return Files.readAllBytes(path);
-    
-    }
-
-    private byte[] combine_files ( String[] filenames ) throws IOException {
-
-        int totalLength = 0;
-        byte[][] fileContents = new byte[filenames.length][];
-
-        for (int i = 0; i < filenames.length; i++) {
-            fileContents[i] = read_file(filenames[i]);
-            totalLength += fileContents[i].length;
-        }
-
-        byte[] combined = new byte[totalLength];
-        int currentPosition = 0;
-
-        for (byte[] fileContent : fileContents) {
-            System.arraycopy(fileContent, 0, combined, currentPosition, fileContent.length);
-            currentPosition += fileContent.length;
-        }
-
-        return combined;
-
-    }
-
-    private Path get_filePath ( String filename ) {
-        String sanitizedFilename = FilenameUtils.getName(filename);
-        return Paths.get(uploadPath, sanitizedFilename);
-    }
-
-    private String generate_fileHash ( byte[] fileBytes ) {
-    
-        try {
-
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = digest.digest(fileBytes);
-            return new BigInteger(1, hashBytes).toString(16); // Convert to hex
-    
-        } 
-        
-        catch ( Exception e ) {
-            throw new RuntimeException();
-        }
-    
-    }
-
 }

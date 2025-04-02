@@ -1,11 +1,13 @@
 package everyway.everyway.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.servlet.http.HttpSession;
 import everyway.everyway.services.actual_services.*;
+import everyway.everyway.models.Utils;
 import everyway.everyway.models.tables.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -15,7 +17,8 @@ import java.security.NoSuchAlgorithmException;
 @Controller
 
 public class FunctionalitiesController {
-
+    
+    @Autowired private Utils utils;
     private final AccountCategories_Accounts_Service accountCategories_Accounts_Service = new AccountCategories_Accounts_Service();
     private final AccountCategories_Itineraries_Service accountCategories_Itineraries_Service = new AccountCategories_Itineraries_Service();
     private final AccountCategories_LocationReports_Service accountCategories_LocationReports_Service = new AccountCategories_LocationReports_Service();
@@ -39,24 +42,6 @@ public class FunctionalitiesController {
     private final Positions_Service positions_Service = new Positions_Service();
     private final Reviews_Service reviews_Service = new Reviews_Service();
     
-
-
-    private String encryptPassword ( String password ) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(password.getBytes());
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Error encrypting password", e);
-        }
-    }
-    
     // login
     @PostMapping("/login")
     public String login ( 
@@ -76,7 +61,7 @@ public class FunctionalitiesController {
         }
 
         // encrypt password and compare with the one in the database
-        String encryptedPassword = encryptPassword(password);
+        String encryptedPassword = utils.encryptPassword(password);
 
         Account loggedAccount = accounts_Service.findByIdAndPassword(pickedAccount.getId(), encryptedPassword);
         if ( loggedAccount != null ) {
@@ -110,7 +95,7 @@ public class FunctionalitiesController {
         newAccount.setUsername(username);
         newAccount.setEmail(email);
 
-        String encryptedPassword = encryptPassword(password);
+        String encryptedPassword = utils.encryptPassword(password);
         newAccount.setPassword(encryptedPassword);
         
         newAccount.setBirthDate(birthDate);
