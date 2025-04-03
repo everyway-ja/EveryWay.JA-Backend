@@ -54,4 +54,14 @@ public class AccountCategories_Locations_Service {
         return accountCategories_Locations_Repository.findAll();
     }
 
+    /**
+     * Saves a new or existing AccountCategory_Location association to the database.
+     *
+     * @param accountCategory_Location The AccountCategory_Location object to save.
+     * @return AccountCategory_Location - The saved AccountCategory_Location object.
+     */
+    public AccountCategory_Location addAssociation ( AccountCategory_Location accountCategory_Location ) {
+        return accountCategories_Locations_Repository.save(accountCategory_Location);
+    }
+
 }

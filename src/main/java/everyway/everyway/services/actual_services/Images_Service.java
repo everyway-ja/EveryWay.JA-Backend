@@ -32,4 +32,14 @@ public class Images_Service {
         return images_Repository.findByImagePath(imagePath);
     }
 
+    /**
+     * Saves a new image to the repository.
+     *
+     * @param image The Image object to be saved.
+     * @return Image - The saved Image object.
+     */
+    public Image addImage ( Image image ) {
+        return images_Repository.save(image);
+    }
+
 }

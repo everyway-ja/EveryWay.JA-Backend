@@ -54,4 +54,14 @@ public class Images_Locations_Service {
         return images_Locations_Repository.findAll();
     }
 
+    /**
+     * Saves a new Image_Location association to the database.
+     *
+     * @param image_Location The Image_Location object to save.
+     * @return Image_Location - The saved Image_Location object.
+     */
+    public Image_Location addAssociation ( Image_Location image_Location ) {
+        return images_Locations_Repository.save(image_Location);
+    }
+
 }

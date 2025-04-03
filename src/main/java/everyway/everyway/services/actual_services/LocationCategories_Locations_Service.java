@@ -54,4 +54,13 @@ public class LocationCategories_Locations_Service {
         return locationCategories_Locations_Repository.findAll();
     }
     
+    /**
+     * Saves a location category-location association.
+     *
+     * @param locationCategory_Location The location category-location association to save.
+     * @return LocationCategory_Location - The saved location category-location association.
+     */
+    public LocationCategory_Location addAssociation ( LocationCategory_Location locationCategory_Location ) {
+        return locationCategories_Locations_Repository.save(locationCategory_Location);
+
 }

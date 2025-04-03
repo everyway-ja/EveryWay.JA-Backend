@@ -25,7 +25,7 @@
   - `associatedAccountCategories` (List<AccountCategory>, obbligatorio): Categorie di account associate.
 - **Descrizione:** Registra un nuovo utente e lo autentica automaticamente.
 - **Errori:**
-  - `302 Redirect`: Se il nome utente è già in uso, reindirizza a `/register?error=true`.
+  - `302 Redirect`: Se il nome utente è già in uso, o se i parametri obbligatori non sono validi, reindirizza a `/register?error=true`.
 - **Reindirizzamento:**
   - `302 Redirect`: Se la registrazione ha successo, reindirizza a `/home`.
 
@@ -60,7 +60,24 @@
   - `associatedAccountCategories` (List<AccountCategory>, obbligatorio): Categorie di account associate.
   - `associatedItineraryCategories` (List<ItineraryCategory>, obbligatorio): Categorie di itinerario associate.
 - **Descrizione:** Aggiunge un nuovo itinerario con le associazioni specificate.
-- **Errori:** Nessuno.
+- **Errori:**
+  - `302 Redirect`: Se i parametri obbligatori non sono validi o l'account non è autenticato.
+- **Reindirizzamento:**
+  - `302 Redirect`: Se l'operazione ha successo, reindirizza a `/home`.
+
+## Endpoint: /addLocation
+- **Metodo:** POST
+- **Parametri:**
+  - `name` (String, obbligatorio): Nome della località.
+  - `description` (String, obbligatorio): Descrizione della località.
+  - `associatedAccount` (Account, obbligatorio): Account associato alla località.
+  - `associatedPosition` (Position, obbligatorio): Posizione associata alla località.
+  - `associatedImages` (List<Image>, obbligatorio): Immagini associate alla località.
+  - `associatedAccountCategories` (List<AccountCategory>, obbligatorio): Categorie di account associate.
+  - `associatedLocationCategories` (List<LocationCategory>, obbligatorio): Categorie di località associate.
+- **Descrizione:** Aggiunge una nuova località con le associazioni specificate.
+- **Errori:**
+  - `302 Redirect`: Se i parametri obbligatori non sono validi o l'account non è autenticato.
 - **Reindirizzamento:**
   - `302 Redirect`: Se l'operazione ha successo, reindirizza a `/home`.
 

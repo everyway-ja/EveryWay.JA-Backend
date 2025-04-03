@@ -29,15 +29,20 @@ import everyway.everyway.models.tables.Account;
 import everyway.everyway.models.tables.AccountCategory;
 import everyway.everyway.models.tables.AccountCategory_Account;
 import everyway.everyway.models.tables.AccountCategory_Itinerary;
+import everyway.everyway.models.tables.AccountCategory_Location;
 import everyway.everyway.models.tables.Image;
 import everyway.everyway.models.tables.Image_Itinerary;
+import everyway.everyway.models.tables.Image_Location;
 import everyway.everyway.models.tables.Itinerary;
 import everyway.everyway.models.tables.ItineraryCategory;
 import everyway.everyway.models.tables.ItineraryCategory_Itinerary;
 import everyway.everyway.models.tables.Itinerary_Location;
 import everyway.everyway.models.tables.Language;
 import everyway.everyway.models.tables.Location;
+import everyway.everyway.models.tables.LocationCategory;
+import everyway.everyway.models.tables.LocationCategory_Location;
 import everyway.everyway.models.tables.Location_Itinerary_Account;
+import everyway.everyway.models.tables.Position;
 import everyway.everyway.services.actual_services.AccountCategories_Accounts_Service;
 import everyway.everyway.services.actual_services.AccountCategories_Itineraries_Service;
 import everyway.everyway.services.actual_services.AccountCategories_LocationReports_Service;
@@ -143,26 +148,55 @@ public class MainController {
         @RequestParam List<AccountCategory> associatedAccountCategories ,
         HttpSession session 
     ) {
-
+        
+        Account newAccount = new Account();
+        
+        // the username musn't be null and must be unique
         List<Account> existingAccount = accounts_Service.findByUsername(username);
         if ( !existingAccount.isEmpty() ) {
             return "redirect:/register?error=true";
         }
-
-        Account newAccount = new Account();
+        newAccount.setUsername(username);
+        
+        // name, surname and email mustn't be empty
+        if (name.strip().isEmpty() || surname.strip().isEmpty() || email.strip().isEmpty()) {
+            return "redirect:/register?error=true";
+        }
         newAccount.setName(name);
         newAccount.setSurname(surname);
-        newAccount.setUsername(username);
         newAccount.setEmail(email);
 
+        // password mustn't be empty and at least 12 characters long
+        if (password.strip().isEmpty() || password.length() < 12) {
+            return "redirect:/register?error=true";
+        }
         String encryptedPassword = utils.encryptString(password);
         newAccount.setPassword(encryptedPassword);
-        
+
+        // check that the birthdate is at least 14 years ago
+        LocalDate today = LocalDate.now();
+        LocalDate minBirthDate = today.minusYears(14);
+        if (birthDate.isAfter(minBirthDate)) {
+            return "redirect:/register?error=true";
+        }
         newAccount.setBirthDate(birthDate);
+        
+        // associated language mustn't be null
+        if (associatedLanguage == null) {
+            return "redirect:/register?error=true";
+        }
         newAccount.setAssociatedLanguage(associatedLanguage);
+        
+        // associated image mustn't be null
+        if (associatedImage == null) {
+            return "redirect:/register?error=true";
+        }
         newAccount.setAssociatedImage(associatedImage);
         
+        // create account
         accounts_Service.addAccount(newAccount);
+        
+        // associate the account with categories
         for ( AccountCategory accountCategory : associatedAccountCategories ) {
             accountCategories_Accounts_Service.addAssociation( new AccountCategory_Account(accountCategory, newAccount) );
         }
@@ -183,6 +217,9 @@ public class MainController {
         try {
         
             utils.save_file(file);
+            Image image = new Image();
+            image.setImagePath(file.getOriginalFilename());
+            images_Service.addImage(image);
             // TODO : generate image's description
 
             return new ResponseEntity<>("Success.", HttpStatus.OK);
@@ -210,6 +247,9 @@ public class MainController {
             for ( MultipartFile file : files ) {
     
                 utils.save_file(file);
+                Image image = new Image();
+                image.setImagePath(file.getOriginalFilename());
+                images_Service.addImage(image);
                 // TODO : generate images' description
     
             }
@@ -238,12 +278,25 @@ public class MainController {
     ) {
 
         Itinerary newItinerary = new Itinerary();
+
+        // the name and description mustn't be empty
+        if (name.strip().isEmpty() || description.strip().isEmpty()) {
+            return "redirect:/addItinerary?error=true";
+        }
         newItinerary.setName(name);
         newItinerary.setDescription(description);
+        
+        // the associated account must be the one that is logged in
+        Account loggedAccount = (Account) session.getAttribute("loggedAccount");
+        if (loggedAccount == null || !loggedAccount.equals(associatedAccount)) {
+            return "redirect:/addItinerary?error=true";
+        }
         newItinerary.setAssociatedAccount(associatedAccount);
 
+        // create itinerary
         itineraries_Service.addItinerary(newItinerary);
 
+        // associate the itinerary with images, locations, account categories and itinerary categories
         for ( Image image : associatedImages ) {
             images_Itineraries_Service.addAssociation( new Image_Itinerary(image, newItinerary) );
         }
@@ -258,6 +311,60 @@ public class MainController {
 
         for ( ItineraryCategory itineraryCategory : associatedItineraryCategories ) {
             itineraryCategories_Itineraries_Service.addAssociation( new ItineraryCategory_Itinerary(itineraryCategory, newItinerary) );
+        }
+
+        return "redirect:/home";
+
+    }
+
+    @PostMapping("/addLocation")
+    public String add_location (
+        @RequestParam String name , 
+        @RequestParam String description , 
+        @RequestParam Account associatedAccount , 
+        @RequestParam Position associatedPosition , 
+        @RequestParam List<Image> associatedImages , 
+        @RequestParam List<AccountCategory> associatedAccountCategories , 
+        @RequestParam List<LocationCategory> associatedLocationCategories , 
+        HttpSession session 
+    ) {
+
+        Location newLocation = new Location();
+
+        // the name and description mustn't be empty
+        if (name.strip().isEmpty() || description.strip().isEmpty()) {
+            return "redirect:/addLocation?error=true";
+        }
+        newLocation.setName(name);
+        newLocation.setDescription(description);
+        
+        // the associated account must be the one that is logged in
+        Account loggedAccount = (Account) session.getAttribute("loggedAccount");
+        if (loggedAccount == null || !loggedAccount.equals(associatedAccount)) {
+            return "redirect:/addLocation?error=true";
+        }
+        newLocation.setAssociatedAccount(associatedAccount);
+        
+        // the associated position mustn't be null
+        if (associatedPosition == null) {
+            return "redirect:/addLocation?error=true";
+        }
+        newLocation.setAssociatedPosition(associatedPosition);
+
+        // create location
+        locations_Service.addLocation(newLocation);
+
+        // associate the location with images, account categories and location categories
+        for ( Image image : associatedImages ) {
+            images_Locations_Service.addAssociation( new Image_Location(image, newLocation) );
+        }
+
+        for ( AccountCategory accountCategory : associatedAccountCategories ) {
+            accountCategories_Locations_Service.addAssociation( new AccountCategory_Location(accountCategory, newLocation) );
+        }
+
+        for ( LocationCategory locationCategory : associatedLocationCategories ) {
+            locationCategories_Locations_Service.addAssociation( new LocationCategory_Location(locationCategory, newLocation) );
         }
 
         return "redirect:/home";

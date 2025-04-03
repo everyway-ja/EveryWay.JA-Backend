@@ -72,5 +72,15 @@ public class Locations_Service {
     public List<Location> findAll () {
         return locations_Repository.findAll();
     }
+
+    /**
+     * Saves a location to the database.
+     *
+     * @param location The Location object to be saved.
+     * @return Location - The saved location object.
+     */
+    public Location addLocation ( Location location ) {
+        return locations_Repository.save(location);
+    }
     
 }
