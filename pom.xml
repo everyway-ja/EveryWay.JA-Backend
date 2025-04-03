@@ -19,7 +19,7 @@
 		</developer>
 	</developers>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>24</java.version>
 	</properties>
 	<dependencies>
 	    <dependency>
@@ -77,10 +77,12 @@
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+						<release>${java.version}</release> <!-- Add this line -->
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
+							<version>1.18.28</version> <!-- Specify the version here -->
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
