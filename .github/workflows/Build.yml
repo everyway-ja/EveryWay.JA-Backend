@@ -18,7 +18,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
+      env:
+        MAVEN_OPTS: "--enable-native-access=ALL-UNNAMED"
       run: mvn -B package --file pom.xml
 
     - name: Run Unit Tests
+      env:
+        MAVEN_OPTS: "--enable-native-access=ALL-UNNAMED"
       run: mvn test
