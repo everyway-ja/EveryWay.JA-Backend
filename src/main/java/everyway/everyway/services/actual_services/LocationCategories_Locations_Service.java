@@ -62,5 +62,6 @@ public class LocationCategories_Locations_Service {
      */
     public LocationCategory_Location addAssociation ( LocationCategory_Location locationCategory_Location ) {
         return locationCategories_Locations_Repository.save(locationCategory_Location);
+    }
 
 }
