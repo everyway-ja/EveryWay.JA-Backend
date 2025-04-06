@@ -2,7 +2,7 @@
 
 ## Endpoint: /login
 - **Metodo:** POST
-- **Parametri:**
+- **Parametri (nel corpo della richiesta):**
   - `username` (String, obbligatorio): Nome utente dell'account.
   - `password` (String, obbligatorio): Password dell'account.
 - **Descrizione:** Effettua il login di un utente verificando le credenziali fornite.
@@ -13,7 +13,7 @@
 
 ## Endpoint: /register
 - **Metodo:** POST
-- **Parametri:**
+- **Parametri (nel corpo della richiesta):**
   - `name` (String, obbligatorio): Nome dell'utente.
   - `surname` (String, obbligatorio): Cognome dell'utente.
   - `username` (String, obbligatorio): Nome utente desiderato.
@@ -31,7 +31,7 @@
 
 ## Endpoint: /upload
 - **Metodo:** POST
-- **Parametri:**
+- **Parametri (nel corpo della richiesta):**
   - `file` (MultipartFile, obbligatorio): File da caricare.
 - **Descrizione:** Carica un singolo file sul server.
 - **Errori:**
@@ -41,7 +41,7 @@
 
 ## Endpoint: /uploadMultiple
 - **Metodo:** POST
-- **Parametri:**
+- **Parametri (nel corpo della richiesta):**
   - `files` (MultipartFile[], obbligatorio): Array di file da caricare.
 - **Descrizione:** Carica più file sul server.
 - **Errori:**
@@ -51,7 +51,7 @@
 
 ## Endpoint: /addItinerary
 - **Metodo:** POST
-- **Parametri:**
+- **Parametri (nel corpo della richiesta):**
   - `name` (String, obbligatorio): Nome dell'itinerario.
   - `description` (String, obbligatorio): Descrizione dell'itinerario.
   - `associatedAccount` (Account, obbligatorio): Account associato all'itinerario.
@@ -67,7 +67,7 @@
 
 ## Endpoint: /addLocation
 - **Metodo:** POST
-- **Parametri:**
+- **Parametri (nel corpo della richiesta):**
   - `name` (String, obbligatorio): Nome della località.
   - `description` (String, obbligatorio): Descrizione della località.
   - `associatedAccount` (Account, obbligatorio): Account associato alla località.
@@ -83,7 +83,7 @@
 
 ## Endpoint: /sendEmail
 - **Metodo:** POST
-- **Parametri:**
+- **Parametri (nel corpo della richiesta):**
   - `name` (String, obbligatorio): Nome del mittente.
   - `email` (String, obbligatorio): Email del mittente.
   - `message` (String, obbligatorio): Messaggio da inviare.
