@@ -19,12 +19,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.multipart.MultipartFile;
 import everyway.everyway.models.Utils;
+import everyway.everyway.models.postbodies.*;
 import everyway.everyway.models.tables.Account;
 import everyway.everyway.models.tables.AccountCategory;
 import everyway.everyway.models.tables.AccountCategory_Account;
@@ -106,11 +106,10 @@ public class MainController {
 
     //! METHODS THAT THE BACKEND MUST IMPLEMENT
     @PostMapping("/login")
-    public String login ( 
-        @RequestParam String username , 
-        @RequestParam String password , 
-        HttpSession session 
-    ) {
+    public String login(@RequestBody LoginRequest loginRequest, HttpSession session) {
+
+        String username = loginRequest.getUsername();
+        String password = loginRequest.getPassword();
 
         List<Account> account = accounts_Service.findByUsername(username);
         Account pickedAccount = account.get(0);
@@ -136,18 +135,17 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public String register ( 
-        @RequestParam String name , 
-        @RequestParam String surname , 
-        @RequestParam String username , 
-        @RequestParam String email , 
-        @RequestParam String password , 
-        @RequestParam LocalDate birthDate , 
-        @RequestParam Language associatedLanguage ,
-        @RequestParam Image associatedImage ,
-        @RequestParam List<AccountCategory> associatedAccountCategories ,
-        HttpSession session 
-    ) {
+    public String register(@RequestBody RegisterRequest registerRequest, HttpSession session) {
+
+        String name = registerRequest.getName();
+        String surname = registerRequest.getSurname();
+        String username = registerRequest.getUsername();
+        String email = registerRequest.getEmail();
+        String password = registerRequest.getPassword();
+        LocalDate birthDate = registerRequest.getBirthDate();
+        Language associatedLanguage = registerRequest.getAssociatedLanguage();
+        Image associatedImage = registerRequest.getAssociatedImage();
+        List<AccountCategory> associatedAccountCategories = registerRequest.getAssociatedAccountCategories();
         
         Account newAccount = new Account();
         
@@ -208,7 +206,9 @@ public class MainController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> handle_fileUpload ( @RequestParam("file") MultipartFile file ) {
+    public ResponseEntity<String> handle_fileUpload(@RequestBody FileUploadRequest fileUploadRequest) {
+
+        MultipartFile file = fileUploadRequest.getFile();
         
         if (file.isEmpty()) {
             return new ResponseEntity<>("Missing File.", HttpStatus.BAD_REQUEST);
@@ -234,7 +234,9 @@ public class MainController {
     }
 
     @PostMapping("/uploadMultiple")
-    public ResponseEntity<String> handle_multipleFileUpload ( @RequestParam("files") MultipartFile[] files ) {
+    public ResponseEntity<String> handle_multipleFileUpload(@RequestBody MultipleFileUploadRequest multipleFileUploadRequest) {
+
+        MultipartFile[] files = multipleFileUploadRequest.getFiles();
         
         for (MultipartFile file : files) {
             if (file.isEmpty()) {
@@ -266,16 +268,15 @@ public class MainController {
     }
 
     @PostMapping("/addItinerary")
-    public String add_itinerary (
-        @RequestParam String name , 
-        @RequestParam String description , 
-        @RequestParam Account associatedAccount ,
-        @RequestParam List<Image> associatedImages, 
-        @RequestParam List<Location> associatedLocations , 
-        @RequestParam List<AccountCategory> associatedAccountCategories , 
-        @RequestParam List<ItineraryCategory> associatedItineraryCategories , 
-        HttpSession session 
-    ) {
+    public String add_itinerary(@RequestBody AddItineraryRequest addItineraryRequest, HttpSession session) {
+
+        String name = addItineraryRequest.getName();
+        String description = addItineraryRequest.getDescription();
+        Account associatedAccount = addItineraryRequest.getAssociatedAccount();
+        List<Image> associatedImages = addItineraryRequest.getAssociatedImages();
+        List<Location> associatedLocations = addItineraryRequest.getAssociatedLocations();
+        List<AccountCategory> associatedAccountCategories = addItineraryRequest.getAssociatedAccountCategories();
+        List<ItineraryCategory> associatedItineraryCategories = addItineraryRequest.getAssociatedItineraryCategories();
 
         Itinerary newItinerary = new Itinerary();
 
@@ -318,16 +319,15 @@ public class MainController {
     }
 
     @PostMapping("/addLocation")
-    public String add_location (
-        @RequestParam String name , 
-        @RequestParam String description , 
-        @RequestParam Account associatedAccount , 
-        @RequestParam Position associatedPosition , 
-        @RequestParam List<Image> associatedImages , 
-        @RequestParam List<AccountCategory> associatedAccountCategories , 
-        @RequestParam List<LocationCategory> associatedLocationCategories , 
-        HttpSession session 
-    ) {
+    public String add_location(@RequestBody AddLocationRequest addLocationRequest, HttpSession session) {
+
+        String name = addLocationRequest.getName();
+        String description = addLocationRequest.getDescription();
+        Account associatedAccount = addLocationRequest.getAssociatedAccount();
+        Position associatedPosition = addLocationRequest.getAssociatedPosition();
+        List<Image> associatedImages = addLocationRequest.getAssociatedImages();
+        List<AccountCategory> associatedAccountCategories = addLocationRequest.getAssociatedAccountCategories();
+        List<LocationCategory> associatedLocationCategories = addLocationRequest.getAssociatedLocationCategories();
 
         Location newLocation = new Location();
 
@@ -372,7 +372,11 @@ public class MainController {
     }
 
     @PostMapping("/sendEmail")
-    public ResponseEntity<Map<String, String>> send_email ( @RequestParam String name , @RequestParam String email , @RequestParam String message ) {
+    public ResponseEntity<Map<String, String>> send_email(@RequestBody SendEmailRequest sendEmailRequest) {
+
+        String name = sendEmailRequest.getName();
+        String email = sendEmailRequest.getEmail();
+        String message = sendEmailRequest.getMessage();
         
         Map<String, String> response = new HashMap<>();
 
